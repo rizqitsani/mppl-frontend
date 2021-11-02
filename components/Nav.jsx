@@ -188,7 +188,7 @@ const MobileNav = ({ open, setOpen }) => (
                     className={({ selected }) =>
                       clsx(
                         selected
-                          ? 'text-indigo-600 border-indigo-600'
+                          ? 'text-teal-600 border-teal-600'
                           : 'text-gray-900 border-transparent',
                         'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                       )
@@ -328,7 +328,7 @@ const DesktopNav = ({ setOpen }) => (
           <span className='sr-only'>Workflow</span>
           <img
             className='h-8 w-auto'
-            src='https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600'
+            src='https://tailwindui.com/img/logos/workflow-mark.svg?color=teal&shade=600'
             alt=''
           />
         </a>
@@ -345,7 +345,7 @@ const DesktopNav = ({ setOpen }) => (
                     <Popover.Button
                       className={clsx(
                         open
-                          ? 'border-indigo-600 text-indigo-600'
+                          ? 'border-teal-600 text-teal-600'
                           : 'border-transparent text-gray-700 hover:text-gray-800',
                         'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                       )}

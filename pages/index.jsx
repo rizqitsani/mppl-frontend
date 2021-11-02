@@ -130,7 +130,7 @@ export default function Home() {
 
                 <a
                   href='#'
-                  className='inline-block text-center bg-amber-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700'
+                  className='inline-block text-center bg-amber-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-teal-700'
                 >
                   Shop Collection
                 </a>
@@ -189,7 +189,7 @@ export default function Home() {
                 </h2>
                 <a
                   href='#'
-                  className='hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block'
+                  className='hidden text-sm font-semibold text-teal-600 hover:text-teal-500 sm:block'
                 >
                   Browse all favorites<span aria-hidden='true'> &rarr;</span>
                 </a>
@@ -223,7 +223,7 @@ export default function Home() {
               <div className='mt-6 sm:hidden'>
                 <a
                   href='#'
-                  className='block text-sm font-semibold text-indigo-600 hover:text-indigo-500'
+                  className='block text-sm font-semibold text-teal-600 hover:text-teal-500'
                 >
                   Browse all favorites<span aria-hidden='true'> &rarr;</span>
                 </a>
