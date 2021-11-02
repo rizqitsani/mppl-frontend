@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import FilterMenu from '@/components/products/FilterMenu';
+import UnstyledLink from '@/components/UnstyledLink';
 
 const products = [
   {
@@ -91,13 +92,13 @@ export default function ProductListPage() {
                     </div>
                     <div className='flex-1 p-4 space-y-2 flex flex-col'>
                       <h3 className='text-sm font-medium text-gray-900'>
-                        <a href={product.href}>
+                        <UnstyledLink href='/products/1'>
                           <span
                             aria-hidden='true'
                             className='absolute inset-0'
                           />
                           {product.name}
-                        </a>
+                        </UnstyledLink>
                       </h3>
                       <p className='text-sm text-gray-500'>
                         {product.description}
