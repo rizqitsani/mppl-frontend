@@ -49,7 +49,7 @@ export default function Home() {
           <Nav.Desktop setOpen={setOpen} />
 
           {/* Hero section */}
-          <div className='min-h-main flex flex-col justify-center relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:static'>
+          <div className='min-h-main flex flex-col sm:justify-center relative max-w-7xl pt-16 sm:pt-0 mx-auto px-4 sm:px-6 lg:px-8 sm:static'>
             <div className='sm:max-w-lg'>
               <h1 className='text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl'>
                 Summer styles are finally here
@@ -77,7 +77,7 @@ export default function Home() {
                             className='w-full h-full object-center object-cover'
                           />
                         </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                        <div className='w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100'>
                           <img
                             src='/images/2.jpg'
                             alt=''
