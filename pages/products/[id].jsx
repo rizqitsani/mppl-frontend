@@ -10,6 +10,7 @@ import clsx from 'clsx';
 
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
+import UnstyledLink from '@/components/UnstyledLink';
 
 const product = {
   name: 'Zip Tote Basket',
@@ -178,12 +179,18 @@ export default function ProductDetailPage() {
 
               <form className='mt-6'>
                 <div className='mt-10 flex sm:flex-col1'>
-                  <button
+                  <UnstyledLink
+                    href='/cart'
+                    className='max-w-xs flex-1 bg-teal-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
+                  >
+                    Add to bag
+                  </UnstyledLink>
+                  {/* <button
                     type='submit'
                     className='max-w-xs flex-1 bg-teal-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
                   >
                     Add to bag
-                  </button>
+                  </button> */}
 
                   <button
                     type='button'
