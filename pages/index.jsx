@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import Seo from '@/components/Seo';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
+import NextImage from '@/components/NextImage';
 
 const favorites = [
   {
@@ -197,13 +198,15 @@ export default function Home() {
               <div className='mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8'>
                 {favorites.map((favorite) => (
                   <div key={favorite.id} className='group relative'>
-                    <div className='w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3'>
-                      <img
-                        src={favorite.imageSrc}
-                        alt={favorite.imageAlt}
-                        className='w-full h-full object-center object-cover'
-                      />
-                    </div>
+                    <NextImage
+                      src={favorite.imageSrc}
+                      alt={favorite.imageAlt}
+                      className='w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3'
+                      imgClassName='w-full h-full object-center object-cover'
+                      width='420'
+                      height='420'
+                      priority
+                    />
                     <h3 className='mt-4 text-base font-semibold text-gray-900'>
                       <a href={favorite.href}>
                         <span className='absolute inset-0' />
