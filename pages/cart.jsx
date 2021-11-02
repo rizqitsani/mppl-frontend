@@ -3,6 +3,7 @@ import { HiCheck, HiClock, HiQuestionMarkCircle, HiX } from 'react-icons/hi';
 
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import UnstyledLink from '@/components/UnstyledLink';
 
 const products = [
   {
@@ -224,12 +225,12 @@ export default function CartPage() {
             </dl>
 
             <div className='mt-6'>
-              <button
-                type='submit'
-                className='w-full bg-teal-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
+              <UnstyledLink
+                href='/checkout'
+                className='flex justify-center w-full bg-teal-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
               >
                 Checkout
-              </button>
+              </UnstyledLink>
             </div>
           </section>
         </form>
