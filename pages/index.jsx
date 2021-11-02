@@ -4,6 +4,8 @@ import Seo from '@/components/Seo';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import NextImage from '@/components/NextImage';
+import UnstyledLink from '@/components/UnstyledLink';
+import CustomLink from '@/components/CustomLink';
 
 const favorites = [
   {
@@ -128,12 +130,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                <a
-                  href='#'
+                <UnstyledLink
+                  href='/products'
                   className='inline-block text-center bg-teal-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-teal-700'
                 >
                   Shop Collection
-                </a>
+                </UnstyledLink>
               </div>
             </div>
           </div>
@@ -176,12 +178,12 @@ export default function Home() {
                 >
                   Our Favorites
                 </h2>
-                <a
-                  href='#'
+                <UnstyledLink
+                  href='/products'
                   className='hidden text-sm font-semibold text-teal-600 hover:text-teal-500 sm:block'
                 >
                   Browse all favorites<span aria-hidden='true'> &rarr;</span>
-                </a>
+                </UnstyledLink>
               </div>
 
               <div className='mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8'>
@@ -236,9 +238,12 @@ export default function Home() {
                         Up to 50% off.
                       </h2>
                       <div className='mt-6 text-base'>
-                        <a href='#' className='font-semibold text-white'>
+                        <CustomLink
+                          href='/products'
+                          className='font-semibold animated-underline text-white'
+                        >
                           Shop the sale<span aria-hidden='true'> &rarr;</span>
-                        </a>
+                        </CustomLink>
                       </div>
                     </div>
 

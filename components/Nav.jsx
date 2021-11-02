@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import {
@@ -7,6 +8,8 @@ import {
   HiOutlineShoppingBag,
   HiOutlineX,
 } from 'react-icons/hi';
+
+import UnstyledLink from '@/components/UnstyledLink';
 
 const navigation = {
   categories: [
@@ -324,14 +327,14 @@ const DesktopNav = ({ setOpen }) => (
 
       {/* Logo */}
       <div className='ml-4 flex lg:ml-0'>
-        <a href='#'>
+        <UnstyledLink href='/'>
           <span className='sr-only'>Workflow</span>
           <img
             className='h-8 w-auto'
             src='https://tailwindui.com/img/logos/workflow-mark.svg?color=teal&shade=600'
             alt=''
           />
-        </a>
+        </UnstyledLink>
       </div>
 
       {/* Flyout menus */}
