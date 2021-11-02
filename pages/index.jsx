@@ -10,8 +10,7 @@ const favorites = [
     name: 'Black Basic Tee',
     price: '$32',
     href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg',
+    imageSrc: '/images/1.jpg',
     imageAlt: "Model wearing women's black cotton crewneck tee.",
   },
   {
@@ -19,8 +18,7 @@ const favorites = [
     name: 'Off-White Basic Tee',
     price: '$32',
     href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg',
+    imageSrc: '/images/2.jpg',
     imageAlt: "Model wearing women's off-white cotton crewneck tee.",
   },
   {
@@ -28,8 +26,7 @@ const favorites = [
     name: 'Mountains Artwork Tee',
     price: '$36',
     href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-03.jpg',
+    imageSrc: '/images/3.jpg',
     imageAlt:
       "Model wearing women's burgundy red crewneck artwork tee with small white triangle overlapping larger black triangle.",
   },
@@ -74,37 +71,14 @@ export default function Home() {
                       <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
                         <div className='w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg'
+                            src='/images/1.jpg'
                             alt=''
                             className='w-full h-full object-center object-cover'
                           />
                         </div>
                         <div className='w-44 h-64 rounded-lg overflow-hidden'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg'
-                            alt=''
-                            className='w-full h-full object-center object-cover'
-                          />
-                        </div>
-                      </div>
-                      <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg'
-                            alt=''
-                            className='w-full h-full object-center object-cover'
-                          />
-                        </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg'
-                            alt=''
-                            className='w-full h-full object-center object-cover'
-                          />
-                        </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                          <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg'
+                            src='/images/2.jpg'
                             alt=''
                             className='w-full h-full object-center object-cover'
                           />
@@ -113,14 +87,37 @@ export default function Home() {
                       <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
                         <div className='w-44 h-64 rounded-lg overflow-hidden'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg'
+                            src='/images/3.jpg'
                             alt=''
                             className='w-full h-full object-center object-cover'
                           />
                         </div>
                         <div className='w-44 h-64 rounded-lg overflow-hidden'>
                           <img
-                            src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg'
+                            src='/images/4.jpg'
+                            alt=''
+                            className='w-full h-full object-center object-cover'
+                          />
+                        </div>
+                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                          <img
+                            src='/images/5.jpg'
+                            alt=''
+                            className='w-full h-full object-center object-cover'
+                          />
+                        </div>
+                      </div>
+                      <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
+                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                          <img
+                            src='/images/6.jpg'
+                            alt=''
+                            className='w-full h-full object-center object-cover'
+                          />
+                        </div>
+                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                          <img
+                            src='/images/7.jpg'
                             alt=''
                             className='w-full h-full object-center object-cover'
                           />
@@ -132,7 +129,7 @@ export default function Home() {
 
                 <a
                   href='#'
-                  className='inline-block text-center bg-indigo-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700'
+                  className='inline-block text-center bg-amber-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700'
                 >
                   Shop Collection
                 </a>
@@ -259,7 +256,7 @@ export default function Home() {
                           <div className='flex-shrink-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg'
+                              src='/images/7.jpg'
                               alt=''
                             />
                           </div>
@@ -267,7 +264,7 @@ export default function Home() {
                           <div className='mt-6 flex-shrink-0 sm:mt-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg'
+                              src='/images/8.jpg'
                               alt=''
                             />
                           </div>
@@ -276,7 +273,7 @@ export default function Home() {
                           <div className='flex-shrink-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg'
+                              src='/images/1.jpg'
                               alt=''
                             />
                           </div>
@@ -284,7 +281,7 @@ export default function Home() {
                           <div className='mt-6 flex-shrink-0 sm:mt-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg'
+                              src='/images/2.jpg'
                               alt=''
                             />
                           </div>
@@ -293,7 +290,7 @@ export default function Home() {
                           <div className='flex-shrink-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg'
+                              src='/images/3.jpg'
                               alt=''
                             />
                           </div>
@@ -301,7 +298,7 @@ export default function Home() {
                           <div className='mt-6 flex-shrink-0 sm:mt-0'>
                             <img
                               className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
-                              src='https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg'
+                              src='/images/4.jpg'
                               alt=''
                             />
                           </div>
