@@ -1,4 +1,5 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -15,6 +16,7 @@ module.exports = {
           500: '#00c4fd',
         },
         dark: '#222222',
+        teal: colors.teal,
       },
     },
   },

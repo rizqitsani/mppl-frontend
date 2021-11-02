@@ -47,4 +47,7 @@
   .animated-underline:focus {
     background-size: 0 2px, 100% 2px;
   }
+  .min-h-main {
+    @apply lg:min-h-[calc(100vh-4.5rem)] min-h-[calc(100vh-3.5rem)];
+  }
 }
