@@ -329,11 +329,7 @@ const DesktopNav = ({ setOpen }) => (
       <div className='ml-4 flex lg:ml-0'>
         <UnstyledLink href='/'>
           <span className='sr-only'>Workflow</span>
-          <img
-            className='h-8 w-auto'
-            src='https://tailwindui.com/img/logos/workflow-mark.svg?color=teal&shade=600'
-            alt=''
-          />
+          <img className='w-auto h-12' src='/logo.svg' alt='' />
         </UnstyledLink>
       </div>
 
