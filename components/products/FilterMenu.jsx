@@ -6,21 +6,21 @@ import clsx from 'clsx';
 const filters = [
   {
     id: 'color',
-    name: 'Color',
+    name: 'Warna',
     options: [
-      { value: 'white', label: 'White' },
-      { value: 'beige', label: 'Beige' },
-      { value: 'blue', label: 'Blue' },
-      { value: 'brown', label: 'Brown' },
-      { value: 'green', label: 'Green' },
-      { value: 'purple', label: 'Purple' },
+      { value: 'white', label: 'Putih' },
+      { value: 'beige', label: 'Krem' },
+      { value: 'blue', label: 'Biru' },
+      { value: 'brown', label: 'Cokelat' },
+      { value: 'green', label: 'Hijau' },
+      { value: 'purple', label: 'Ungu' },
     ],
   },
   {
     id: 'category',
-    name: 'Category',
+    name: 'Kategori',
     options: [
-      { value: 'new-arrivals', label: 'All New Arrivals' },
+      { value: 'new-arrivals', label: 'Barang Baru' },
       { value: 'tees', label: 'Tees' },
       { value: 'crewnecks', label: 'Crewnecks' },
       { value: 'sweatshirts', label: 'Sweatshirts' },
@@ -29,7 +29,7 @@ const filters = [
   },
   {
     id: 'sizes',
-    name: 'Sizes',
+    name: 'Ukuran',
     options: [
       { value: 'xs', label: 'XS' },
       { value: 's', label: 'S' },
@@ -142,14 +142,14 @@ const MobileFilterMenu = ({ open, setOpen }) => (
 
 const DesktopFilterMenu = ({ setOpen }) => (
   <aside>
-    <h2 className='sr-only'>Filters</h2>
+    <h2 className='sr-only'>Filter</h2>
 
     <button
       type='button'
       className='inline-flex items-center lg:hidden'
       onClick={() => setOpen(true)}
     >
-      <span className='text-sm font-medium text-gray-700'>Filters</span>
+      <span className='text-sm font-medium text-gray-700'>Filter</span>
       <HiPlusSm
         className='flex-shrink-0 ml-1 h-5 w-5 text-gray-400'
         aria-hidden='true'
