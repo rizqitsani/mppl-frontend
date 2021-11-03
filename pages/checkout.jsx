@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
+import UnstyledLink from '@/components/UnstyledLink';
 
 const products = [
   {
@@ -553,13 +554,13 @@ export default function CheckoutPage() {
                   </div>
                 </dl>
 
-                <div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
-                  <button
-                    type='submit'
-                    className='w-full bg-teal-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
+                <div className='px-4 py-6 border-t border-gray-200 sm:px-6'>
+                  <UnstyledLink
+                    href='/orders/1'
+                    className='flex justify-center w-full px-4 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
                   >
                     Confirm order
-                  </button>
+                  </UnstyledLink>
                 </div>
               </div>
             </div>
