@@ -54,12 +54,12 @@ export default function Home() {
           <div className='min-h-main flex flex-col sm:justify-center relative max-w-7xl pt-16 sm:pt-0 mx-auto px-4 sm:px-6 lg:px-8 sm:static'>
             <div className='sm:max-w-lg'>
               <h1 className='text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl'>
-                Summer styles are finally here
+                Style perhiasan perak terbaik sudah tiba di sini
               </h1>
               <p className='mt-4 text-xl text-gray-500'>
-                This year, our new summer collection will shelter you from the
-                harsh elements of a world that doesn&apos;t care if you live or
-                die.
+                Tahun ini, kami menghadirkan tampilan perhiasan perak yang
+                sesuai trend era kini. Tidak perlu takut lagi untuk tampil
+                percaya diri di hadapan dunia.
               </p>
             </div>
             <div>
@@ -134,7 +134,7 @@ export default function Home() {
                   href='/products'
                   className='inline-block text-center bg-teal-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-teal-700'
                 >
-                  Shop Collection
+                  Koleksi Produk
                 </UnstyledLink>
               </div>
             </div>
@@ -150,19 +150,19 @@ export default function Home() {
                   id='cause-heading'
                   className='text-3xl font-extrabold tracking-tight text-white sm:text-4xl'
                 >
-                  Long-term thinking
+                  Visi Kami
                 </h2>
                 <p className='mt-3 text-xl text-white'>
-                  We&apos;re committed to responsible, sustainable, and ethical
-                  manufacturing. Our small-scale approach allows us to focus on
-                  quality and reduce our impact. We&apos;re doing our best to
-                  delay the inevitable heat-death of the universe.
+                  Kami bertanggung jawab dalam mengembangkan produk yang
+                  berdampak secara etis. Kami menghadirkan produk yang akan
+                  membantu Anda memenuhi kebutuhan hiasan diri terbaik dan
+                  terlengkap. Keamanan dan estetika Anda menjadi prioritas kami.
                 </p>
                 <a
                   href='#'
                   className='mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto'
                 >
-                  Read our story
+                  Tentang Kami
                 </a>
               </div>
             </div>
@@ -176,13 +176,14 @@ export default function Home() {
                   id='favorites-heading'
                   className='text-2xl font-extrabold tracking-tight text-gray-900'
                 >
-                  Our Favorites
+                  Favorit Kami
                 </h2>
                 <UnstyledLink
                   href='/products'
                   className='hidden text-sm font-semibold text-teal-600 hover:text-teal-500 sm:block'
                 >
-                  Browse all favorites<span aria-hidden='true'> &rarr;</span>
+                  Kunjungi semua produk favorit
+                  <span aria-hidden='true'> &rarr;</span>
                 </UnstyledLink>
               </div>
 
@@ -216,7 +217,8 @@ export default function Home() {
                   href='#'
                   className='block text-sm font-semibold text-teal-600 hover:text-teal-500'
                 >
-                  Browse all favorites<span aria-hidden='true'> &rarr;</span>
+                  Kunjungi semua produk favorit
+                  <span aria-hidden='true'> &rarr;</span>
                 </a>
               </div>
             </div>
@@ -233,7 +235,7 @@ export default function Home() {
                         id='sale-heading'
                         className='text-4xl font-extrabold tracking-tight text-white md:text-5xl'
                       >
-                        Final Stock.
+                        Diskon Produk.
                         <br />
                         Up to 50% off.
                       </h2>
@@ -242,7 +244,7 @@ export default function Home() {
                           href='/products'
                           className='font-semibold animated-underline text-white'
                         >
-                          Shop the sale<span aria-hidden='true'> &rarr;</span>
+                          Kunjungi produk<span aria-hidden='true'> &rarr;</span>
                         </CustomLink>
                       </div>
                     </div>
