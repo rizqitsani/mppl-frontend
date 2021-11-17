@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "prepare": "husky install",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint --fix **/*.{js,jsx} && yarn prettier:format",
+    "lint:strict": "eslint --max-warnings=0 **/*.{js,jsx}",
+    "prettier:check": "prettier -c **/*.{js,jsx}",
+    "prettier:format": "prettier -w **/*.{js,jsx}"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
