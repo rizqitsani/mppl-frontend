@@ -2,7 +2,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 import Nav from '@/components/Nav';
-import UnstyledLink from '@/components/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 const products = [
   {
@@ -55,14 +55,14 @@ export default function OrderDetailsPage() {
         <Nav.Desktop open={open} setOpen={setOpen} />
       </header>
 
-      <div className='max-w-2xl mx-auto pt-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <div className='max-w-2xl pt-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
         <UnstyledLink
           href='/orders'
           className='hidden text-sm font-medium text-teal-600 hover:text-teal-500 sm:block'
         >
           View all orders<span aria-hidden='true'> &larr;</span>
         </UnstyledLink>
-        <div className='px-4 space-y-2 mt-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0'>
+        <div className='px-4 mt-2 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0'>
           <div className='flex sm:items-baseline sm:space-x-4'>
             <h1 className='text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl'>
               Order #54879
@@ -92,13 +92,13 @@ export default function OrderDetailsPage() {
                 key={product.id}
                 className='bg-white border-t border-b border-gray-200 shadow-lg sm:border sm:rounded-lg'
               >
-                <div className='py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8'>
+                <div className='px-4 py-6 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8'>
                   <div className='sm:flex lg:col-span-7'>
-                    <div className='flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40'>
+                    <div className='flex-shrink-0 w-full overflow-hidden rounded-lg aspect-w-1 aspect-h-1 sm:aspect-none sm:w-40 sm:h-40'>
                       <img
                         src={product.imageSrc}
                         alt={product.imageAlt}
-                        className='w-full h-full object-center object-cover sm:w-full sm:h-full'
+                        className='object-cover object-center w-full h-full sm:w-full sm:h-full'
                       />
                     </div>
 
@@ -116,7 +116,7 @@ export default function OrderDetailsPage() {
                   </div>
 
                   <div className='mt-6 lg:mt-0 lg:col-span-5'>
-                    <dl className='grid grid-cols-2 gap-x-6 text-sm'>
+                    <dl className='grid grid-cols-2 text-sm gap-x-6'>
                       <div>
                         <dt className='font-medium text-gray-900'>
                           Delivery address
@@ -131,7 +131,7 @@ export default function OrderDetailsPage() {
                         <dt className='font-medium text-gray-900'>
                           Shipping updates
                         </dt>
-                        <dd className='mt-3 text-gray-500 space-y-3'>
+                        <dd className='mt-3 space-y-3 text-gray-500'>
                           <p>{product.email}</p>
                           <p>{product.phone}</p>
                           <button
@@ -146,14 +146,14 @@ export default function OrderDetailsPage() {
                   </div>
                 </div>
 
-                <div className='border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8'>
+                <div className='px-4 py-6 border-t border-gray-200 sm:px-6 lg:p-8'>
                   <h4 className='sr-only'>Status</h4>
                   <p className='text-sm font-medium text-gray-900'>
                     {product.status} on{' '}
                     <time dateTime={product.datetime}>{product.date}</time>
                   </p>
                   <div className='mt-6' aria-hidden='true'>
-                    <div className='bg-gray-200 rounded-full overflow-hidden'>
+                    <div className='overflow-hidden bg-gray-200 rounded-full'>
                       <div
                         className='h-2 bg-teal-600 rounded-full'
                         style={{
@@ -161,7 +161,7 @@ export default function OrderDetailsPage() {
                         }}
                       />
                     </div>
-                    <div className='hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6'>
+                    <div className='hidden grid-cols-4 mt-6 text-sm font-medium text-gray-600 sm:grid'>
                       <div className='text-teal-600'>Order placed</div>
                       <div
                         className={clsx(
@@ -199,7 +199,7 @@ export default function OrderDetailsPage() {
         <div className='mt-16'>
           <h2 className='sr-only'>Billing Summary</h2>
 
-          <div className='bg-gray-100 py-6 px-4 sm:px-6 sm:rounded-lg lg:px-8 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8'>
+          <div className='px-4 py-6 bg-gray-100 sm:px-6 sm:rounded-lg lg:px-8 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8'>
             <dl className='grid grid-cols-2 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:col-span-7'>
               <div>
                 <dt className='font-medium text-gray-900'>Billing address</dt>
@@ -214,15 +214,15 @@ export default function OrderDetailsPage() {
                   Payment information
                 </dt>
                 <div className='mt-3'>
-                  <dd className='-ml-4 -mt-4 flex flex-wrap'>
-                    <div className='ml-4 mt-4 flex-shrink-0'>
+                  <dd className='flex flex-wrap -mt-4 -ml-4'>
+                    <div className='flex-shrink-0 mt-4 ml-4'>
                       <svg
                         aria-hidden='true'
                         width={36}
                         height={24}
                         viewBox='0 0 36 24'
                         xmlns='http://www.w3.org/2000/svg'
-                        className='h-6 w-auto'
+                        className='w-auto h-6'
                       >
                         <rect width={36} height={24} rx={4} fill='#224DBA' />
                         <path
@@ -232,7 +232,7 @@ export default function OrderDetailsPage() {
                       </svg>
                       <p className='sr-only'>Visa</p>
                     </div>
-                    <div className='ml-4 mt-4'>
+                    <div className='mt-4 ml-4'>
                       <p className='text-gray-900'>Ending with 4242</p>
                       <p className='text-gray-600'>Expires 02 / 24</p>
                     </div>
@@ -241,20 +241,20 @@ export default function OrderDetailsPage() {
               </div>
             </dl>
 
-            <dl className='mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:col-span-5'>
-              <div className='pb-4 flex items-center justify-between'>
+            <dl className='mt-8 text-sm divide-y divide-gray-200 lg:mt-0 lg:col-span-5'>
+              <div className='flex items-center justify-between pb-4'>
                 <dt className='text-gray-600'>Subtotal</dt>
                 <dd className='font-medium text-gray-900'>$72</dd>
               </div>
-              <div className='py-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between py-4'>
                 <dt className='text-gray-600'>Shipping</dt>
                 <dd className='font-medium text-gray-900'>$5</dd>
               </div>
-              <div className='py-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between py-4'>
                 <dt className='text-gray-600'>Tax</dt>
                 <dd className='font-medium text-gray-900'>$6.16</dd>
               </div>
-              <div className='pt-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between pt-4'>
                 <dt className='font-medium text-gray-900'>Order total</dt>
                 <dd className='font-medium text-teal-600'>$83.16</dd>
               </div>

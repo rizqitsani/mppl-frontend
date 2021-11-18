@@ -10,7 +10,7 @@ import clsx from 'clsx';
 
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
-import UnstyledLink from '@/components/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 const product = {
   name: 'Zip Tote Basket',
@@ -84,28 +84,28 @@ export default function ProductDetailPage() {
         <Nav.Desktop open={open} setOpen={setOpen} />
       </header>
 
-      <main className='max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8'>
+      <main className='mx-auto max-w-7xl sm:pt-16 sm:px-6 lg:px-8'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
           {/* Product */}
           <div className='lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start'>
             {/* Image gallery */}
             <Tab.Group as='div' className='flex flex-col-reverse'>
               {/* Image selector */}
-              <div className='hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none'>
+              <div className='hidden w-full max-w-2xl mx-auto mt-6 sm:block lg:max-w-none'>
                 <Tab.List className='grid grid-cols-4 gap-6'>
                   {product.images.map((image) => (
                     <Tab
                       key={image.id}
-                      className='relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
+                      className='relative flex items-center justify-center h-24 text-sm font-medium text-gray-900 uppercase bg-white rounded-md cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
                     >
                       {({ selected }) => (
                         <>
                           <span className='sr-only'>{image.name}</span>
-                          <span className='absolute inset-0 rounded-md overflow-hidden'>
+                          <span className='absolute inset-0 overflow-hidden rounded-md'>
                             <img
                               src={image.src}
                               alt=''
-                              className='w-full h-full object-center object-cover'
+                              className='object-cover object-center w-full h-full'
                             />
                           </span>
                           <span
@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className='w-full h-full object-center object-cover sm:rounded-lg'
+                      className='object-cover object-center w-full h-full sm:rounded-lg'
                     />
                   </Tab.Panel>
                 ))}
@@ -136,7 +136,7 @@ export default function ProductDetailPage() {
             </Tab.Group>
 
             {/* Product info */}
-            <div className='mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0'>
+            <div className='px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0'>
               <h1 className='text-3xl font-extrabold tracking-tight text-gray-900'>
                 {product.name}
               </h1>
@@ -172,32 +172,32 @@ export default function ProductDetailPage() {
                 <h3 className='sr-only'>Description</h3>
 
                 <div
-                  className='text-base text-gray-700 space-y-6'
+                  className='space-y-6 text-base text-gray-700'
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
               </div>
 
               <form className='mt-6'>
-                <div className='mt-10 flex sm:flex-col1'>
+                <div className='flex mt-10 sm:flex-col1'>
                   <UnstyledLink
                     href='/cart'
-                    className='max-w-xs flex-1 bg-teal-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
+                    className='flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
                   >
                     Add to bag
                   </UnstyledLink>
                   {/* <button
                     type='submit'
-                    className='max-w-xs flex-1 bg-teal-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
+                    className='flex items-center justify-center flex-1 max-w-xs px-8 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500 sm:w-full'
                   >
                     Add to bag
                   </button> */}
 
                   <button
                     type='button'
-                    className='ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500'
+                    className='flex items-center justify-center px-3 py-3 ml-4 text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500'
                   >
                     <HiOutlineHeart
-                      className='h-6 w-6 flex-shrink-0'
+                      className='flex-shrink-0 w-6 h-6'
                       aria-hidden='true'
                     />
                     <span className='sr-only'>Add to favorites</span>
@@ -211,17 +211,17 @@ export default function ProductDetailPage() {
                 </h2>
 
                 <div
-                  className='mt-4 prose prose-sm text-gray-500'
+                  className='mt-4 prose-sm prose text-gray-500'
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
               </div>
 
-              <div className='mt-8 border-t border-gray-200 pt-8'>
+              <div className='pt-8 mt-8 border-t border-gray-200'>
                 <h2 className='text-sm font-medium text-gray-900'>
                   Fabric &amp; Care
                 </h2>
 
-                <div className='mt-4 prose prose-sm text-gray-500'>
+                <div className='mt-4 prose-sm prose text-gray-500'>
                   <ul role='list'>
                     {product.details.map((item) => (
                       <li key={item}>{item}</li>
@@ -240,11 +240,11 @@ export default function ProductDetailPage() {
                   {policies.map((policy) => (
                     <div
                       key={policy.name}
-                      className='bg-gray-50 border border-gray-200 rounded-lg p-6 text-center'
+                      className='p-6 text-center border border-gray-200 rounded-lg bg-gray-50'
                     >
                       <dt>
                         <policy.icon
-                          className='mx-auto h-6 w-6 flex-shrink-0 text-gray-400'
+                          className='flex-shrink-0 w-6 h-6 mx-auto text-gray-400'
                           aria-hidden='true'
                         />
                         <span className='mt-4 text-sm font-medium text-gray-900'>

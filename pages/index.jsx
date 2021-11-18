@@ -4,8 +4,8 @@ import Seo from '@/components/Seo';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import NextImage from '@/components/NextImage';
-import UnstyledLink from '@/components/UnstyledLink';
-import CustomLink from '@/components/CustomLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
+import CustomLink from '@/components/links/CustomLink';
 
 const favorites = [
   {
@@ -51,9 +51,9 @@ export default function Home() {
           <Nav.Desktop setOpen={setOpen} />
 
           {/* Hero section */}
-          <div className='min-h-main flex flex-col sm:justify-center relative max-w-7xl pt-16 sm:pt-0 mx-auto px-4 sm:px-6 lg:px-8 sm:static'>
+          <div className='relative flex flex-col px-4 pt-16 mx-auto min-h-main sm:justify-center max-w-7xl sm:pt-0 sm:px-6 lg:px-8 sm:static'>
             <div className='sm:max-w-lg'>
-              <h1 className='text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl'>
+              <h1 className='text-4xl font-extrabold tracking-tight text-gray-900 font sm:text-6xl'>
                 Style perhiasan perak terbaik sudah tiba di sini
               </h1>
               <p className='mt-4 text-xl text-gray-500'>
@@ -71,58 +71,58 @@ export default function Home() {
                 >
                   <div className='absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8'>
                     <div className='flex items-center space-x-6 lg:space-x-8'>
-                      <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100'>
+                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44 sm:opacity-0 lg:opacity-100'>
                           <img
                             src='/images/1.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44 sm:opacity-0 lg:opacity-100'>
                           <img
                             src='/images/2.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
                       </div>
-                      <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/3.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/4.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/5.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
                       </div>
-                      <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/6.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
-                        <div className='w-44 h-64 rounded-lg overflow-hidden'>
+                        <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/7.jpg'
                             alt=''
-                            className='w-full h-full object-center object-cover'
+                            className='object-cover object-center w-full h-full'
                           />
                         </div>
                       </div>
@@ -132,7 +132,7 @@ export default function Home() {
 
                 <UnstyledLink
                   href='/products'
-                  className='inline-block text-center bg-teal-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-teal-700'
+                  className='inline-block px-8 py-3 font-medium text-center text-white bg-teal-600 border border-transparent rounded-md hover:bg-teal-700'
                 >
                   Koleksi Produk
                 </UnstyledLink>
@@ -145,7 +145,7 @@ export default function Home() {
           {/* Featured section */}
           <section aria-labelledby='cause-heading'>
             <div className='relative flex items-center min-h-[20rem] bg-teal-600 px-6 sm:px-12 lg:px-16'>
-              <div className='max-w-3xl mx-auto flex flex-col items-center text-center'>
+              <div className='flex flex-col items-center max-w-3xl mx-auto text-center'>
                 <h2
                   id='cause-heading'
                   className='text-3xl font-extrabold tracking-tight text-white sm:text-4xl'
@@ -160,7 +160,7 @@ export default function Home() {
                 </p>
                 <a
                   href='#'
-                  className='mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto'
+                  className='block w-full px-8 py-3 mt-8 text-base font-medium text-gray-900 bg-white border border-transparent rounded-md hover:bg-gray-100 sm:w-auto'
                 >
                   Tentang Kami
                 </a>
@@ -170,7 +170,7 @@ export default function Home() {
 
           {/* Favorites section */}
           <section aria-labelledby='favorites-heading'>
-            <div className='max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8'>
+            <div className='px-4 py-24 mx-auto max-w-7xl sm:py-32 sm:px-6 lg:px-8'>
               <div className='sm:flex sm:items-baseline sm:justify-between'>
                 <h2
                   id='favorites-heading'
@@ -187,13 +187,13 @@ export default function Home() {
                 </UnstyledLink>
               </div>
 
-              <div className='mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8'>
+              <div className='grid grid-cols-1 mt-6 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8'>
                 {favorites.map((favorite) => (
-                  <div key={favorite.id} className='group relative'>
+                  <div key={favorite.id} className='relative group'>
                     <NextImage
                       src={favorite.imageSrc}
                       alt={favorite.imageAlt}
-                      className='w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3'
+                      className='w-full overflow-hidden rounded-lg h-96 group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3'
                       imgClassName='w-full h-full object-center object-cover'
                       width='420'
                       height='420'
@@ -228,7 +228,7 @@ export default function Home() {
           <section aria-labelledby='sale-heading'>
             <div className='pt-32 overflow-hidden sm:pt-14'>
               <div className='bg-gray-800'>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
                   <div className='relative pt-48 pb-16 sm:pb-24'>
                     <div>
                       <h2
@@ -242,27 +242,27 @@ export default function Home() {
                       <div className='mt-6 text-base'>
                         <CustomLink
                           href='/products'
-                          className='font-semibold animated-underline text-white'
+                          className='font-semibold text-white animated-underline'
                         >
                           Kunjungi produk<span aria-hidden='true'> &rarr;</span>
                         </CustomLink>
                       </div>
                     </div>
 
-                    <div className='absolute -top-32 left-1/2 transform -translate-x-1/2 sm:top-6 sm:translate-x-0'>
-                      <div className='ml-24 flex space-x-6 min-w-max sm:ml-3 lg:space-x-8'>
+                    <div className='absolute transform -translate-x-1/2 -top-32 left-1/2 sm:top-6 sm:translate-x-0'>
+                      <div className='flex ml-24 space-x-6 min-w-max sm:ml-3 lg:space-x-8'>
                         <div className='flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8'>
                           <div className='flex-shrink-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/7.jpg'
                               alt=''
                             />
                           </div>
 
-                          <div className='mt-6 flex-shrink-0 sm:mt-0'>
+                          <div className='flex-shrink-0 mt-6 sm:mt-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/8.jpg'
                               alt=''
                             />
@@ -271,15 +271,15 @@ export default function Home() {
                         <div className='flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8'>
                           <div className='flex-shrink-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/1.jpg'
                               alt=''
                             />
                           </div>
 
-                          <div className='mt-6 flex-shrink-0 sm:mt-0'>
+                          <div className='flex-shrink-0 mt-6 sm:mt-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/2.jpg'
                               alt=''
                             />
@@ -288,15 +288,15 @@ export default function Home() {
                         <div className='flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8'>
                           <div className='flex-shrink-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/3.jpg'
                               alt=''
                             />
                           </div>
 
-                          <div className='mt-6 flex-shrink-0 sm:mt-0'>
+                          <div className='flex-shrink-0 mt-6 sm:mt-0'>
                             <img
-                              className='h-64 w-64 rounded-lg object-cover md:h-72 md:w-72'
+                              className='object-cover w-64 h-64 rounded-lg md:h-72 md:w-72'
                               src='/images/4.jpg'
                               alt=''
                             />

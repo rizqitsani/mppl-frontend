@@ -4,8 +4,8 @@ const Footer = () => {
       <h2 id='footer-heading' className='sr-only'>
         Footer
       </h2>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8'>
-        <div className='border-t border-gray-200 py-10'>
+      <div className='px-4 mx-auto mt-8 max-w-7xl sm:px-6 lg:px-8'>
+        <div className='py-10 border-t border-gray-200'>
           <p className='text-sm text-gray-500'>
             Copyright &copy; 2021 PT Aneka Usaha Indonesia
           </p>

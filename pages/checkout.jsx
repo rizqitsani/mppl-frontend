@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
-import UnstyledLink from '@/components/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 const products = [
   {
@@ -53,7 +53,7 @@ export default function CheckoutPage() {
         <Nav.Desktop open={open} setOpen={setOpen} />
       </header>
 
-      <main className='max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8'>
+      <main className='px-4 pt-16 pb-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
           <h1 className='sr-only'>Checkout</h1>
 
@@ -83,12 +83,12 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              <div className='mt-10 border-t border-gray-200 pt-10'>
+              <div className='pt-10 mt-10 border-t border-gray-200'>
                 <h2 className='text-lg font-medium text-gray-900'>
                   Shipping information
                 </h2>
 
-                <div className='mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
+                <div className='grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
                   <div>
                     <label
                       htmlFor='first-name'
@@ -270,7 +270,7 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              <div className='mt-10 border-t border-gray-200 pt-10'>
+              <div className='pt-10 mt-10 border-t border-gray-200'>
                 <RadioGroup
                   value={selectedDeliveryMethod}
                   onChange={setSelectedDeliveryMethod}
@@ -279,7 +279,7 @@ export default function CheckoutPage() {
                     Delivery method
                   </RadioGroup.Label>
 
-                  <div className='mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
+                  <div className='grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
                     {deliveryMethods.map((deliveryMethod) => (
                       <RadioGroup.Option
                         key={deliveryMethod.id}
@@ -294,7 +294,7 @@ export default function CheckoutPage() {
                       >
                         {({ checked, active }) => (
                           <>
-                            <div className='flex-1 flex'>
+                            <div className='flex flex-1'>
                               <div className='flex flex-col'>
                                 <RadioGroup.Label
                                   as='span'
@@ -304,7 +304,7 @@ export default function CheckoutPage() {
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                   as='span'
-                                  className='mt-1 flex items-center text-sm text-gray-500'
+                                  className='flex items-center mt-1 text-sm text-gray-500'
                                 >
                                   {deliveryMethod.turnaround}
                                 </RadioGroup.Description>
@@ -318,7 +318,7 @@ export default function CheckoutPage() {
                             </div>
                             {checked ? (
                               <HiCheckCircle
-                                className='h-5 w-5 text-teal-600'
+                                className='w-5 h-5 text-teal-600'
                                 aria-hidden='true'
                               />
                             ) : null}
@@ -341,7 +341,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment */}
-              <div className='mt-10 border-t border-gray-200 pt-10'>
+              <div className='pt-10 mt-10 border-t border-gray-200'>
                 <h2 className='text-lg font-medium text-gray-900'>Payment</h2>
 
                 <fieldset className='mt-4'>
@@ -355,20 +355,20 @@ export default function CheckoutPage() {
                             name='payment-type'
                             type='radio'
                             defaultChecked
-                            className='focus:ring-teal-500 h-4 w-4 text-teal-600 border-gray-300'
+                            className='w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500'
                           />
                         ) : (
                           <input
                             id={paymentMethod.id}
                             name='payment-type'
                             type='radio'
-                            className='focus:ring-teal-500 h-4 w-4 text-teal-600 border-gray-300'
+                            className='w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500'
                           />
                         )}
 
                         <label
                           htmlFor={paymentMethod.id}
-                          className='ml-3 block text-sm font-medium text-gray-700'
+                          className='block ml-3 text-sm font-medium text-gray-700'
                         >
                           {paymentMethod.title}
                         </label>
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
                   </div>
                 </fieldset>
 
-                <div className='mt-6 grid grid-cols-4 gap-y-6 gap-x-4'>
+                <div className='grid grid-cols-4 mt-6 gap-y-6 gap-x-4'>
                   <div className='col-span-4'>
                     <label
                       htmlFor='card-number'
@@ -463,7 +463,7 @@ export default function CheckoutPage() {
                 <h3 className='sr-only'>Items in your cart</h3>
                 <ul role='list' className='divide-y divide-gray-200'>
                   {products.map((product) => (
-                    <li key={product.id} className='flex py-6 px-4 sm:px-6'>
+                    <li key={product.id} className='flex px-4 py-6 sm:px-6'>
                       <div className='flex-shrink-0'>
                         <img
                           src={product.imageSrc}
@@ -472,9 +472,9 @@ export default function CheckoutPage() {
                         />
                       </div>
 
-                      <div className='ml-6 flex-1 flex flex-col'>
+                      <div className='flex flex-col flex-1 ml-6'>
                         <div className='flex'>
-                          <div className='min-w-0 flex-1'>
+                          <div className='flex-1 min-w-0'>
                             <h4 className='text-sm'>
                               <a
                                 href={product.href}
@@ -491,18 +491,18 @@ export default function CheckoutPage() {
                             </p>
                           </div>
 
-                          <div className='ml-4 flex-shrink-0 flow-root'>
+                          <div className='flex-shrink-0 flow-root ml-4'>
                             <button
                               type='button'
                               className='-m-2.5 bg-white p-2.5 flex items-center justify-center text-gray-400 hover:text-gray-500'
                             >
                               <span className='sr-only'>Remove</span>
-                              <HiTrash className='h-5 w-5' aria-hidden='true' />
+                              <HiTrash className='w-5 h-5' aria-hidden='true' />
                             </button>
                           </div>
                         </div>
 
-                        <div className='flex-1 pt-2 flex items-end justify-between'>
+                        <div className='flex items-end justify-between flex-1 pt-2'>
                           <p className='mt-1 text-sm font-medium text-gray-900'>
                             {product.price}
                           </p>
@@ -514,7 +514,7 @@ export default function CheckoutPage() {
                             <select
                               id='quantity'
                               name='quantity'
-                              className='rounded-md border border-gray-300 text-base font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
+                              className='text-base font-medium text-left text-gray-700 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
                             >
                               <option value={1}>1</option>
                               <option value={2}>2</option>
@@ -531,7 +531,7 @@ export default function CheckoutPage() {
                     </li>
                   ))}
                 </ul>
-                <dl className='border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6'>
+                <dl className='px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6'>
                   <div className='flex items-center justify-between'>
                     <dt className='text-sm'>Subtotal</dt>
                     <dd className='text-sm font-medium text-gray-900'>
@@ -546,7 +546,7 @@ export default function CheckoutPage() {
                     <dt className='text-sm'>Taxes</dt>
                     <dd className='text-sm font-medium text-gray-900'>$5.52</dd>
                   </div>
-                  <div className='flex items-center justify-between border-t border-gray-200 pt-6'>
+                  <div className='flex items-center justify-between pt-6 border-t border-gray-200'>
                     <dt className='text-base font-medium'>Total</dt>
                     <dd className='text-base font-medium text-gray-900'>
                       $75.52

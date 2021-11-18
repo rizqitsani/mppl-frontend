@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import FilterMenu from '@/components/products/FilterMenu';
-import UnstyledLink from '@/components/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 const products = [
   {
@@ -52,8 +52,8 @@ export default function ProductListPage() {
           setOpen={setMobileFiltersOpen}
         />
 
-        <main className='max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8'>
-          <div className='border-b border-gray-200 pt-24 pb-10'>
+        <main className='max-w-2xl px-4 mx-auto lg:max-w-7xl lg:px-8'>
+          <div className='pt-24 pb-10 border-b border-gray-200'>
             <h1 className='text-4xl font-extrabold tracking-tight text-gray-900'>
               New Arrivals
             </h1>
@@ -81,16 +81,16 @@ export default function ProductListPage() {
                 {products.map((product) => (
                   <div
                     key={product.id}
-                    className='group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden'
+                    className='relative flex flex-col overflow-hidden bg-white border border-gray-200 rounded-lg group'
                   >
-                    <div className='aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96'>
+                    <div className='bg-gray-200 aspect-w-3 aspect-h-4 group-hover:opacity-75 sm:aspect-none sm:h-96'>
                       <img
                         src={product.imageSrc}
                         alt={product.imageAlt}
-                        className='w-full h-full object-center object-cover sm:w-full sm:h-full'
+                        className='object-cover object-center w-full h-full sm:w-full sm:h-full'
                       />
                     </div>
-                    <div className='flex-1 p-4 space-y-2 flex flex-col'>
+                    <div className='flex flex-col flex-1 p-4 space-y-2'>
                       <h3 className='text-sm font-medium text-gray-900'>
                         <UnstyledLink href='/products/1'>
                           <span
@@ -103,7 +103,7 @@ export default function ProductListPage() {
                       <p className='text-sm text-gray-500'>
                         {product.description}
                       </p>
-                      <div className='flex-1 flex flex-col justify-end'>
+                      <div className='flex flex-col justify-end flex-1'>
                         <p className='text-sm italic text-gray-500'>
                           {product.options}
                         </p>

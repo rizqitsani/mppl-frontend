@@ -3,7 +3,7 @@ import { HiCheck, HiClock, HiQuestionMarkCircle, HiX } from 'react-icons/hi';
 
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import UnstyledLink from '@/components/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 const products = [
   {
@@ -53,7 +53,7 @@ export default function CartPage() {
         <Nav.Desktop open={open} setOpen={setOpen} />
       </header>
 
-      <main className='max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <main className='max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8'>
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
           Shopping Cart
         </h1>
@@ -74,11 +74,11 @@ export default function CartPage() {
                     <img
                       src={product.imageSrc}
                       alt={product.imageAlt}
-                      className='w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48'
+                      className='object-cover object-center w-24 h-24 rounded-md sm:w-48 sm:h-48'
                     />
                   </div>
 
-                  <div className='ml-4 flex-1 flex flex-col justify-between sm:ml-6'>
+                  <div className='flex flex-col justify-between flex-1 ml-4 sm:ml-6'>
                     <div className='relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0'>
                       <div>
                         <div className='flex justify-between'>
@@ -91,10 +91,10 @@ export default function CartPage() {
                             </a>
                           </h3>
                         </div>
-                        <div className='mt-1 flex text-sm'>
+                        <div className='flex mt-1 text-sm'>
                           <p className='text-gray-500'>{product.color}</p>
                           {product.size ? (
-                            <p className='ml-4 pl-4 border-l border-gray-200 text-gray-500'>
+                            <p className='pl-4 ml-4 text-gray-500 border-l border-gray-200'>
                               {product.size}
                             </p>
                           ) : null}
@@ -129,24 +129,24 @@ export default function CartPage() {
                         <div className='absolute top-0 right-0'>
                           <button
                             type='button'
-                            className='-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500'
+                            className='inline-flex p-2 -m-2 text-gray-400 hover:text-gray-500'
                           >
                             <span className='sr-only'>Remove</span>
-                            <HiX className='h-5 w-5' aria-hidden='true' />
+                            <HiX className='w-5 h-5' aria-hidden='true' />
                           </button>
                         </div>
                       </div>
                     </div>
 
-                    <p className='mt-4 flex text-sm text-gray-700 space-x-2'>
+                    <p className='flex mt-4 space-x-2 text-sm text-gray-700'>
                       {product.inStock ? (
                         <HiCheck
-                          className='flex-shrink-0 h-5 w-5 text-green-500'
+                          className='flex-shrink-0 w-5 h-5 text-green-500'
                           aria-hidden='true'
                         />
                       ) : (
                         <HiClock
-                          className='flex-shrink-0 h-5 w-5 text-gray-300'
+                          className='flex-shrink-0 w-5 h-5 text-gray-300'
                           aria-hidden='true'
                         />
                       )}
@@ -166,7 +166,7 @@ export default function CartPage() {
           {/* Order summary */}
           <section
             aria-labelledby='summary-heading'
-            className='mt-16 bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5'
+            className='px-4 py-6 mt-16 rounded-lg bg-gray-50 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5'
           >
             <h2
               id='summary-heading'
@@ -180,43 +180,43 @@ export default function CartPage() {
                 <dt className='text-sm text-gray-600'>Subtotal</dt>
                 <dd className='text-sm font-medium text-gray-900'>$99.00</dd>
               </div>
-              <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
                 <dt className='flex items-center text-sm text-gray-600'>
                   <span>Shipping estimate</span>
                   <a
                     href='#'
-                    className='ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500'
+                    className='flex-shrink-0 ml-2 text-gray-400 hover:text-gray-500'
                   >
                     <span className='sr-only'>
                       Learn more about how shipping is calculated
                     </span>
                     <HiQuestionMarkCircle
-                      className='h-5 w-5'
+                      className='w-5 h-5'
                       aria-hidden='true'
                     />
                   </a>
                 </dt>
                 <dd className='text-sm font-medium text-gray-900'>$5.00</dd>
               </div>
-              <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
                 <dt className='flex text-sm text-gray-600'>
                   <span>Tax estimate</span>
                   <a
                     href='#'
-                    className='ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500'
+                    className='flex-shrink-0 ml-2 text-gray-400 hover:text-gray-500'
                   >
                     <span className='sr-only'>
                       Learn more about how tax is calculated
                     </span>
                     <HiQuestionMarkCircle
-                      className='h-5 w-5'
+                      className='w-5 h-5'
                       aria-hidden='true'
                     />
                   </a>
                 </dt>
                 <dd className='text-sm font-medium text-gray-900'>$8.32</dd>
               </div>
-              <div className='border-t border-gray-200 pt-4 flex items-center justify-between'>
+              <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
                 <dt className='text-base font-medium text-gray-900'>
                   Order total
                 </dt>
@@ -227,7 +227,7 @@ export default function CartPage() {
             <div className='mt-6'>
               <UnstyledLink
                 href='/checkout'
-                className='flex justify-center w-full bg-teal-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
+                className='flex justify-center w-full px-4 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
               >
                 Checkout
               </UnstyledLink>
