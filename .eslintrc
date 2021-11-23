@@ -1,13 +1,21 @@
 {
   "env": {
+    "node": true,
     "browser": true,
-    "es2021": true,
-    "node": true
+    "es6": true
   },
-  "extends": ["eslint:recommended", "next"],
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": "warn",
     "no-console": "warn",
-    "@next/next/no-img-element": "off"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
