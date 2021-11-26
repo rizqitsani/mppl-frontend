@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from '@/contexts/AuthContext';
 
 import '@/styles/globals.css';
 import PrivateRoute from '@/components/PrivateRoute';
@@ -9,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const protectedRoutes = ['/cart', '/checkout', '/orders', '/orders/[id]'];
 
   return (
-    <AuthProvider>
+    <>
       <div>
         <Toaster
           reverseOrder={false}
@@ -25,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PrivateRoute protectedRoutes={protectedRoutes}>
         <Component {...pageProps} />
       </PrivateRoute>
-    </AuthProvider>
+    </>
   );
 }
 

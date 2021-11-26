@@ -5,7 +5,8 @@ import { Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 
-import { useAuthDispatch } from '@/contexts/AuthContext';
+import useAuthStore from '@/store/useAuthStore';
+
 import NextImage from '@/components/NextImage';
 
 import { getAvatarUrl } from '@/lib/helper';
@@ -17,10 +18,10 @@ type AdminHeaderProps = {
 export default function AdminHeader({ setSidebarOpen }: AdminHeaderProps) {
   const router = useRouter();
 
-  const dispatch = useAuthDispatch();
+  const logout = useAuthStore.useLogout();
 
   const handleLogout = () => {
-    dispatch('LOGOUT');
+    logout();
     router.replace('/signin');
   };
 

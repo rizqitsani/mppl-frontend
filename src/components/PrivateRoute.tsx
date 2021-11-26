@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 
 import { ImSpinner8 } from 'react-icons/im';
 
-import { useAuthState } from '@/contexts/AuthContext';
+import useAuthStore from '@/store/useAuthStore';
+
+import axiosClient from '@/lib/axios';
+import { UserInfoApi } from '@/types/api';
 
 type PrivateRouteProps = {
   protectedRoutes: string[];
@@ -15,9 +18,39 @@ export default function PrivateRoute({
   children,
 }: PrivateRouteProps) {
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuthState();
+
+  const isAuthenticated = useAuthStore.useIsAuthenticated();
+  const isLoading = useAuthStore.useIsLoading();
+  const login = useAuthStore.useLogin();
+  const stopLoading = useAuthStore.useStopLoading();
 
   const isProtected = protectedRoutes.indexOf(router.pathname) !== -1;
+
+  React.useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const token = localStorage.getItem('token');
+
+        if (token === null || token === undefined) {
+          return;
+        }
+
+        const res = await axiosClient.get<UserInfoApi>('/auth/info');
+
+        login({
+          ...res.data.data,
+          token: token + '',
+        });
+      } catch (err) {
+        localStorage.removeItem('token');
+      } finally {
+        stopLoading();
+      }
+    };
+
+    loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     if (!isLoading && !isAuthenticated && isProtected) {

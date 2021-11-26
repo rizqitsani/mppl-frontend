@@ -5,12 +5,12 @@ import { Dialog, Menu, Transition } from '@headlessui/react';
 import { HiOutlineX, HiSelector } from 'react-icons/hi';
 import clsx from 'clsx';
 
-import { useAuthDispatch, useAuthState } from '@/contexts/AuthContext';
+import useAuthStore from '@/store/useAuthStore';
 
+import NextImage from '@/components/NextImage';
 import { AdminNavigationType } from '@/components/layout/AdminLayout';
 
 import { getAvatarUrl } from '@/lib/helper';
-import NextImage from '../NextImage';
 
 type AdminSidebarProps = {
   navigation: AdminNavigationType[];
@@ -25,11 +25,10 @@ export default function AdminSidebar({
 }: AdminSidebarProps) {
   const router = useRouter();
 
-  const dispatch = useAuthDispatch();
-  const { user } = useAuthState();
+  const logout = useAuthStore.useLogout();
 
   const handleLogout = () => {
-    dispatch('LOGOUT');
+    logout();
     router.replace('/signin');
   };
 
@@ -172,7 +171,7 @@ export default function AdminSidebar({
                           </div>
                           <span className='flex flex-col flex-1 min-w-0'>
                             <span className='text-sm font-medium text-gray-900 truncate'>
-                              {user?.role === 'admin' ? 'Admin' : user?.nama}
+                              Admin
                             </span>
                           </span>
                         </span>
