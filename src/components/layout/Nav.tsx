@@ -9,7 +9,7 @@ import {
   HiOutlineX,
 } from 'react-icons/hi';
 
-import { useAuthDispatch, useAuthState } from '@/contexts/AuthContext';
+import useAuthStore from '@/store/useAuthStore';
 
 import NextImage from '@/components/NextImage';
 import UnstyledLink from '@/components/links/UnstyledLink';
@@ -22,7 +22,7 @@ type NavProps = {
 };
 
 const MobileNav = ({ open, setOpen }: NavProps) => {
-  const { isAuthenticated } = useAuthState();
+  const isAuthenticated = useAuthStore.useIsAuthenticated();
 
   return (
     <Transition.Root show={open} as={React.Fragment}>
@@ -106,11 +106,12 @@ const MobileNav = ({ open, setOpen }: NavProps) => {
 };
 
 const DesktopNav = ({ setOpen }: NavProps) => {
-  const dispatch = useAuthDispatch();
-  const { isAuthenticated, user } = useAuthState();
+  const isAuthenticated = useAuthStore.useIsAuthenticated();
+  const logout = useAuthStore.useLogout();
+  const user = useAuthStore.useUser();
 
   const handleLogout = () => {
-    dispatch('LOGOUT');
+    logout();
   };
 
   return (
@@ -161,26 +162,8 @@ const DesktopNav = ({ setOpen }: NavProps) => {
       </div>
 
       <div className='flex items-center'>
-        {!isAuthenticated && (
-          <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
-            <UnstyledLink
-              href='/signin'
-              className='text-sm font-medium text-gray-700 hover:text-gray-800'
-            >
-              Masuk
-            </UnstyledLink>
-            <span className='w-px h-6 bg-gray-200' aria-hidden='true' />
-            <UnstyledLink
-              href='/signup'
-              className='text-sm font-medium text-gray-700 hover:text-gray-800'
-            >
-              Buat akun
-            </UnstyledLink>
-          </div>
-        )}
-
         {/* Cart */}
-        {isAuthenticated && (
+        {isAuthenticated ? (
           <div className='flex'>
             <a href='#' className='flex items-center p-2 -m-2 group'>
               <HiOutlineShoppingBag
@@ -233,6 +216,22 @@ const DesktopNav = ({ setOpen }: NavProps) => {
                 </>
               )}
             </Menu>
+          </div>
+        ) : (
+          <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
+            <UnstyledLink
+              href='/signin'
+              className='text-sm font-medium text-gray-700 hover:text-gray-800'
+            >
+              Masuk
+            </UnstyledLink>
+            <span className='w-px h-6 bg-gray-200' aria-hidden='true' />
+            <UnstyledLink
+              href='/signup'
+              className='text-sm font-medium text-gray-700 hover:text-gray-800'
+            >
+              Buat akun
+            </UnstyledLink>
           </div>
         )}
       </div>

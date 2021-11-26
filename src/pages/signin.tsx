@@ -1,22 +1,24 @@
+import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+
+import useAuthStore from '@/store/useAuthStore';
 
 import Button from '@/components/Button';
+import NextImage from '@/components/NextImage';
+import Seo from '@/components/Seo';
 import Input from '@/components/forms/Input';
 import PasswordInput from '@/components/forms/PasswordInput';
-import Seo from '@/components/Seo';
-import UnstyledLink from '@/components/links/UnstyledLink';
 import ButtonLink from '@/components/links/ButtonLink';
-import toast from 'react-hot-toast';
+import UnstyledLink from '@/components/links/UnstyledLink';
+
 import axiosClient from '@/lib/axios';
-import { useAuthDispatch } from '@/contexts/AuthContext';
-import { useRouter } from 'next/router';
 import { defaultToastMessage } from '@/lib/constant';
-import NextImage from '@/components/NextImage';
 
 export default function SignInPage() {
   const router = useRouter();
 
-  const dispatch = useAuthDispatch();
+  const login = useAuthStore.useLogin();
 
   const methods = useForm();
   const { handleSubmit } = methods;
@@ -35,7 +37,7 @@ export default function SignInPage() {
           return axiosClient.get('/auth/info');
         })
         .then((user) => {
-          dispatch('LOGIN', { ...user.data.data, token: tempToken });
+          login({ ...user.data.data, token: tempToken });
           router.replace('/');
         }),
       {
