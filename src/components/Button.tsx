@@ -12,7 +12,7 @@ type ButtonProps = {
   isFullWidth?: boolean;
   isLoading?: boolean;
   variant?: keyof typeof ButtonVariant;
-} & React.ComponentPropsWithoutRef<'button'>;
+} & React.ComponentPropsWithRef<'button'>;
 
 export default function Button({
   children,
@@ -34,7 +34,7 @@ export default function Button({
         'border shadow-sm',
         'focus:outline-none focus-visible:text-teal-400',
         variant === 'primary'
-          ? 'bg-teal-400 text-black hover:bg-teal-400/90 hover:text-black border-teal-500 disabled:hover:bg-teal-400 disabled:brightness-75  focus-visible:text-dark'
+          ? 'bg-teal-400 text-white hover:bg-teal-400/90 hover:text-white border-teal-500 disabled:hover:bg-teal-400 disabled:brightness-75  focus-visible:text-dark'
           : variant === 'light'
           ? 'bg-white disabled:bg-gray-200 text-dark hover:bg-gray-200 hover:text-dark focus-visible:text-dark border-gray-400 disabled:hover:text-dark'
           : variant === 'dark'
