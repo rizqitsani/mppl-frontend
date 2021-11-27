@@ -24,6 +24,7 @@ export default function AdminSidebar({
   sidebarOpen,
 }: AdminSidebarProps) {
   const router = useRouter();
+  const { pathname } = router;
 
   const logout = useAuthStore.useLogout();
 
@@ -104,16 +105,18 @@ export default function AdminSidebar({
                         key={item.name}
                         href={item.href}
                         className={clsx(
-                          item.current
+                          item.href === pathname
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                           'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md'
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={
+                          item.href === pathname ? 'page' : undefined
+                        }
                       >
                         <item.icon
                           className={clsx(
-                            item.current
+                            item.href === pathname
                               ? 'text-gray-500'
                               : 'text-gray-400 group-hover:text-gray-500',
                             'mr-3 h-6 w-6'
@@ -258,16 +261,16 @@ export default function AdminSidebar({
                     key={item.name}
                     href={item.href}
                     className={clsx(
-                      item.current
+                      item.href === pathname
                         ? 'bg-gray-200 text-gray-900'
                         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
-                    aria-current={item.current ? 'page' : undefined}
+                    aria-current={item.href === pathname ? 'page' : undefined}
                   >
                     <item.icon
                       className={clsx(
-                        item.current
+                        item.href === pathname
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 h-6 w-6'
