@@ -11,27 +11,23 @@ export type AdminNavigationType = {
   name: string;
   href: string;
   icon: IconType;
-  current: boolean;
 };
 
 const navigation: AdminNavigationType[] = [
   {
-    name: 'Home',
+    name: 'Beranda',
     href: '/admin/dashboard',
     icon: HiOutlineHome,
-    current: true,
   },
   {
-    name: 'Transactions',
-    href: '/admin/transaction',
+    name: 'Transaksi',
+    href: '/admin/transactions',
     icon: IoWalletOutline,
-    current: false,
   },
   {
-    name: 'Products',
-    href: '/admin/product',
+    name: 'Produk',
+    href: '/admin/products',
     icon: HiOutlineDatabase,
-    current: false,
   },
 ];
 
