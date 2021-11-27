@@ -28,12 +28,15 @@
     "react-hook-form": "^7.20.2",
     "react-hot-toast": "^2.1.1",
     "react-icons": "^4.3.1",
+    "react-query": "^3.33.5",
+    "react-table": "^7.7.0",
     "zustand": "^3.6.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@types/react": "^17.0.36",
+    "@types/react-table": "^7.7.8",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^7.32.0",
