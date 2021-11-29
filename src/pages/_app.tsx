@@ -1,11 +1,23 @@
 import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, QueryOptions } from 'react-query';
 
 import '@/styles/globals.css';
 import PrivateRoute from '@/components/PrivateRoute';
+import axiosClient from '@/lib/axios';
 
-const queryClient = new QueryClient();
+const defaultQueryFn = async ({ queryKey }: QueryOptions) => {
+  const { data } = await axiosClient.get(`${queryKey?.[0]}`);
+  return data;
+};
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: defaultQueryFn,
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const protectedRoutes = ['/cart', '/checkout', '/orders', '/orders/[id]'];
