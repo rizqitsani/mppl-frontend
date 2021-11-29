@@ -3,9 +3,8 @@ import { RadioGroup } from '@headlessui/react';
 import { HiCheckCircle, HiTrash } from 'react-icons/hi';
 import clsx from 'clsx';
 
-import Footer from '@/components/layout/Footer';
-import Nav from '@/components/layout/Nav';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const products = [
   {
@@ -39,21 +38,13 @@ const paymentMethods = [
 ];
 
 export default function CheckoutPage() {
-  const [open, setOpen] = React.useState(false);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = React.useState(
     deliveryMethods[0]
   );
 
   return (
-    <div className='bg-white'>
-      {/* Mobile menu */}
-      <Nav.Mobile open={open} setOpen={setOpen} />
-
-      <header className='relative'>
-        <Nav.Desktop open={open} setOpen={setOpen} />
-      </header>
-
-      <main className='px-4 pt-16 pb-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+    <Layout>
+      <main className='pt-16 pb-24 layout'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
           <h1 className='sr-only'>Checkout</h1>
 
@@ -568,8 +559,6 @@ export default function CheckoutPage() {
           </form>
         </div>
       </main>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 }

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import Nav from '@/components/layout/Nav';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const products = [
   {
@@ -44,18 +44,9 @@ const products = [
 ];
 
 export default function OrderDetailsPage() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <div className='bg-white'>
-      {/* Mobile menu */}
-      <Nav.Mobile open={open} setOpen={setOpen} />
-
-      <header className='relative bg-white'>
-        <Nav.Desktop open={open} setOpen={setOpen} />
-      </header>
-
-      <div className='max-w-2xl pt-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+    <Layout>
+      <div className='pt-16 sm:py-24 layout'>
         <UnstyledLink
           href='/orders'
           className='hidden text-sm font-medium text-teal-600 hover:text-teal-500 sm:block'
@@ -263,6 +254,6 @@ export default function OrderDetailsPage() {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

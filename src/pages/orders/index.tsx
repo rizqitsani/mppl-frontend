@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Nav from '@/components/layout/Nav';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const orders = [
   {
@@ -30,18 +30,9 @@ const orders = [
 ];
 
 export default function OrderListPage() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <div className='bg-white'>
-      {/* Mobile menu */}
-      <Nav.Mobile open={open} setOpen={setOpen} />
-
-      <header className='relative bg-white'>
-        <Nav.Desktop open={open} setOpen={setOpen} />
-      </header>
-
-      <div className='px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:pb-24 lg:px-8'>
+    <Layout>
+      <div className='py-16 lg:pb-24 layout'>
         <div className='max-w-xl'>
           <h1 className='text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl'>
             Order history
@@ -167,6 +158,6 @@ export default function OrderListPage() {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

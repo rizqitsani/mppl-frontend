@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { HiCheck, HiClock, HiQuestionMarkCircle, HiX } from 'react-icons/hi';
 
-import Nav from '@/components/layout/Nav';
-import Footer from '@/components/layout/Footer';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const products = [
   {
@@ -42,18 +41,9 @@ const products = [
 ];
 
 export default function CartPage() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <div className='bg-white'>
-      {/* Mobile menu */}
-      <Nav.Mobile open={open} setOpen={setOpen} />
-
-      <header className='relative bg-white'>
-        <Nav.Desktop open={open} setOpen={setOpen} />
-      </header>
-
-      <main className='max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8'>
+    <Layout>
+      <main className='pt-16 pb-24 layout'>
         <h1 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
           Shopping Cart
         </h1>
@@ -236,8 +226,6 @@ export default function CartPage() {
           </section>
         </form>
       </main>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 }

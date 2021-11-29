@@ -52,7 +52,7 @@ export default function Home() {
           <Nav.Desktop open={open} setOpen={setOpen} />
 
           {/* Hero section */}
-          <div className='relative flex flex-col px-4 pt-16 mx-auto min-h-main sm:justify-center max-w-7xl sm:pt-0 sm:px-6 lg:px-8 sm:static'>
+          <div className='relative flex flex-col pt-16 min-h-main sm:justify-center sm:pt-0 layout sm:static'>
             <div className='sm:max-w-lg'>
               <h1 className='text-4xl font-extrabold tracking-tight text-gray-900 font sm:text-6xl'>
                 Style perhiasan perak terbaik sudah tiba di sini
@@ -64,11 +64,11 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <div className='mt-10'>
+              <div className='mt-10 overflow-hidden'>
                 {/* Decorative image grid */}
                 <div
                   aria-hidden='true'
-                  className='pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-7xl lg:mx-auto lg:w-full'
+                  className='overflow-hidden pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-7xl lg:mx-auto lg:w-full'
                 >
                   <div className='absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8'>
                     <div className='flex items-center space-x-6 lg:space-x-8'>
@@ -88,7 +88,7 @@ export default function Home() {
                           />
                         </div>
                       </div>
-                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
+                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8 sm:opacity-0 lg:opacity-100'>
                         <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/3.jpg'
@@ -111,7 +111,7 @@ export default function Home() {
                           />
                         </div>
                       </div>
-                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8'>
+                      <div className='grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8 sm:opacity-0 lg:opacity-100'>
                         <div className='h-64 overflow-hidden rounded-lg w-44'>
                           <img
                             src='/images/6.jpg'
@@ -145,15 +145,15 @@ export default function Home() {
         <main>
           {/* Featured section */}
           <section aria-labelledby='cause-heading'>
-            <div className='relative flex items-center min-h-[20rem] bg-teal-600 px-6 sm:px-12 lg:px-16'>
+            <div className='relative flex items-center min-h-[28rem] bg-teal-600 px-6 sm:px-12 lg:px-16'>
               <div className='flex flex-col items-center max-w-3xl mx-auto text-center'>
                 <h2
                   id='cause-heading'
-                  className='text-3xl font-extrabold tracking-tight text-white sm:text-4xl'
+                  className='text-2xl font-extrabold tracking-tight text-white sm:text-4xl'
                 >
                   Visi Kami
                 </h2>
-                <p className='mt-3 text-xl text-white'>
+                <p className='mt-3 text-lg text-white sm:text-xl'>
                   Kami bertanggung jawab dalam mengembangkan produk yang
                   berdampak secara etis. Kami menghadirkan produk yang akan
                   membantu Anda memenuhi kebutuhan hiasan diri terbaik dan
@@ -171,7 +171,7 @@ export default function Home() {
 
           {/* Favorites section */}
           <section aria-labelledby='favorites-heading'>
-            <div className='px-4 py-24 mx-auto max-w-7xl sm:py-32 sm:px-6 lg:px-8'>
+            <div className='py-24 sm:py-32 layout'>
               <div className='sm:flex sm:items-baseline sm:justify-between'>
                 <h2
                   id='favorites-heading'
@@ -229,7 +229,7 @@ export default function Home() {
           <section aria-labelledby='sale-heading'>
             <div className='pt-32 overflow-hidden sm:pt-14'>
               <div className='bg-gray-800'>
-                <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+                <div className='layout'>
                   <div className='relative pt-48 pb-16 sm:pb-24'>
                     <div>
                       <h2

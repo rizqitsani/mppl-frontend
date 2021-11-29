@@ -8,9 +8,8 @@ import {
 } from 'react-icons/hi';
 import clsx from 'clsx';
 
-import Footer from '@/components/layout/Footer';
-import Nav from '@/components/layout/Nav';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const product = {
   name: 'Zip Tote Basket',
@@ -74,17 +73,9 @@ const policies = [
 ];
 
 export default function ProductDetailPage() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <div className='bg-white'>
-      <Nav.Mobile open={open} setOpen={setOpen} />
-
-      <header className='relative bg-white'>
-        <Nav.Desktop open={open} setOpen={setOpen} />
-      </header>
-
-      <main className='mx-auto max-w-7xl sm:pt-16 sm:px-6 lg:px-8'>
+    <Layout>
+      <main className=' sm:pt-16 layout'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
           {/* Product */}
           <div className='lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start'>
@@ -264,8 +255,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 }

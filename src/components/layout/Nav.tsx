@@ -117,7 +117,7 @@ const DesktopNav = ({ setOpen }: NavProps) => {
   return (
     <nav
       aria-label='Top'
-      className='relative z-20 flex items-center justify-between min-h-[3.5rem] lg:min-h-[4.5rem] bg-white bg-opacity-90 backdrop-filter backdrop-blur-xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
+      className='relative z-20 flex items-center justify-between min-h-[3.5rem] lg:min-h-[4.5rem] bg-white bg-opacity-90 backdrop-filter backdrop-blur-xl layout'
     >
       <div className='flex items-center'>
         <button

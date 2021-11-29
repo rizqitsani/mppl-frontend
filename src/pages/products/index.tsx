@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import Nav from '@/components/layout/Nav';
-import Footer from '@/components/layout/Footer';
 import FilterMenu from '@/components/products/FilterMenu';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import Layout from '@/components/layout/Layout';
 
 const products = [
   {
@@ -33,18 +32,10 @@ const products = [
 ];
 
 export default function ProductListPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
 
   return (
-    <div className='bg-white'>
-      {/* Mobile menu */}
-      <Nav.Mobile open={mobileMenuOpen} setOpen={setMobileMenuOpen} />
-
-      <header className='relative bg-white'>
-        <Nav.Desktop open={mobileMenuOpen} setOpen={setMobileMenuOpen} />
-      </header>
-
+    <Layout>
       <div>
         {/* Mobile filter dialog */}
         <FilterMenu.Mobile
@@ -52,8 +43,8 @@ export default function ProductListPage() {
           setOpen={setMobileFiltersOpen}
         />
 
-        <main className='max-w-2xl px-4 mx-auto lg:max-w-7xl lg:px-8'>
-          <div className='pt-24 pb-10 border-b border-gray-200'>
+        <main className='layout'>
+          <div className='pb-10 border-b border-gray-200 pt-14 sm:pt-16'>
             <h1 className='text-4xl font-extrabold tracking-tight text-gray-900'>
               New Arrivals
             </h1>
@@ -119,9 +110,7 @@ export default function ProductListPage() {
             </section>
           </div>
         </main>
-
-        <Footer />
       </div>
-    </div>
+    </Layout>
   );
 }
