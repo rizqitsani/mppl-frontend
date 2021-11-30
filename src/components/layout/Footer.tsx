@@ -4,7 +4,7 @@ import NextImage from '@/components/NextImage';
 const Footer = () => {
   return (
     <footer className='bg-white'>
-      <div className='py-12  md:flex md:items-center md:justify-between layout'>
+      <div className='min-h-[3.5rem] lg:min-h-[5rem] md:flex md:items-center md:justify-between layout'>
         <div className='flex justify-center space-x-6 md:order-2'>
           <UnstyledLink href='/'>
             <span className='sr-only'>Silvery</span>
