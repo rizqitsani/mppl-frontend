@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import toast from 'react-hot-toast';
 import { Tab } from '@headlessui/react';
+
 import {
   HiOutlineCurrencyDollar,
   HiOutlineGlobe,
@@ -9,39 +11,37 @@ import {
 } from 'react-icons/hi';
 import clsx from 'clsx';
 
-import useRQWithToast from '@/hooks/useRQWithToast';
+import useAuthStore from '@/store/useAuthStore';
+import useCartStore from '@/store/useCartStore';
 
 import Button from '@/components/Button';
 import Layout from '@/components/layout/Layout';
 
 import { formatRupiah } from '@/lib/helper';
+import axiosClient from '@/lib/axios';
+import { defaultToastMessage } from '@/lib/constant';
 import { ProductDetailApi } from '@/types/api';
 
-const product = {
-  images: [
-    {
-      id: 1,
-      name: 'Angled view',
-      src: '/images/1.jpg',
-      alt: 'Angled front view with bag zipped and handles upright.',
-    },
-    {
-      id: 2,
-      name: 'Angled view',
-      src: '/images/2.jpg',
-      alt: 'Angled front view with bag zipped and handles upright.',
-    },
-    {
-      id: 3,
-      name: 'Angled view',
-      src: '/images/3.jpg',
-      alt: 'Angled front view with bag zipped and handles upright.',
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-};
+const images = [
+  {
+    id: 1,
+    name: 'Angled view',
+    src: '/images/1.jpg',
+    alt: 'Angled front view with bag zipped and handles upright.',
+  },
+  {
+    id: 2,
+    name: 'Angled view',
+    src: '/images/2.jpg',
+    alt: 'Angled front view with bag zipped and handles upright.',
+  },
+  {
+    id: 3,
+    name: 'Angled view',
+    src: '/images/3.jpg',
+    alt: 'Angled front view with bag zipped and handles upright.',
+  },
+];
 
 const policies = [
   {
@@ -61,16 +61,51 @@ export default function ProductDetailPage() {
   const { query } = router;
   const productId = query.id;
 
-  const { data: queryData, error } = useRQWithToast(
-    useQuery<ProductDetailApi, Error>(`/products/${productId}`, {
+  const isAuthenticated = useAuthStore.useIsAuthenticated();
+  const cartItems = useCartStore.useItems();
+  const addToCart = useCartStore.useAdd();
+
+  const { data: queryData, error } = useQuery<ProductDetailApi, Error>(
+    `/products/${productId}`,
+    {
       enabled: !!productId,
-    })
+    }
   );
   const data = queryData?.data;
 
   if (error) {
+    toast.error('Produk tidak ditemukan!');
     router.push('/products');
   }
+
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      toast.error('Masuk ke akun Anda untuk menambah item ke keranjang!');
+      router.replace('/signin');
+      return;
+    }
+
+    const isExist = Boolean(
+      cartItems.find((item) => item.product.name === data.name)
+    );
+
+    if (isExist) {
+      toast.error('Barang sudah ada di keranjang!');
+    } else {
+      toast.promise(
+        axiosClient.post('/cart', { product_id: data.id }).then((res) => {
+          addToCart({
+            ...res.data.data,
+            product: { name: data.name, price: data.price },
+          });
+        }),
+        {
+          ...defaultToastMessage,
+          success: 'Berhasil menambahkan item ke keranjang',
+        }
+      );
+    }
+  };
 
   return (
     <Layout>
@@ -84,7 +119,7 @@ export default function ProductDetailPage() {
                 {/* Image selector */}
                 <div className='hidden w-full max-w-2xl mx-auto mt-6 sm:block lg:max-w-none'>
                   <Tab.List className='grid grid-cols-4 gap-6'>
-                    {product.images.map((image) => (
+                    {images.map((image) => (
                       <Tab
                         key={image.id}
                         className='relative flex items-center justify-center h-24 text-sm font-medium text-gray-900 uppercase bg-white rounded-md cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
@@ -115,7 +150,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 <Tab.Panels className='w-full aspect-w-1 aspect-h-1'>
-                  {product.images.map((image) => (
+                  {images.map((image) => (
                     <Tab.Panel key={image.id}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -155,7 +190,13 @@ export default function ProductDetailPage() {
 
                   <form className='mt-6'>
                     <div className='flex mt-10 sm:flex-col1'>
-                      <Button variant='primary'>Add to bag</Button>
+                      <Button
+                        type='button'
+                        variant='primary'
+                        onClick={handleAddToCart}
+                      >
+                        Add to bag
+                      </Button>
                       <button
                         type='button'
                         className='flex items-center justify-center px-3 py-3 ml-4 text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500'

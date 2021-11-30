@@ -15,6 +15,14 @@ export interface ProductDetailApi {
   data: Product;
 }
 
+export interface CartApi {
+  message: string;
+  data: {
+    items: Cart[];
+    total: number;
+  };
+}
+
 export interface Product {
   id: string;
   name: string;

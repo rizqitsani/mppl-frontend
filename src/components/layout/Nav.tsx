@@ -10,6 +10,7 @@ import {
 } from 'react-icons/hi';
 
 import useAuthStore from '@/store/useAuthStore';
+import useCartStore from '@/store/useCartStore';
 
 import NextImage from '@/components/NextImage';
 import UnstyledLink from '@/components/links/UnstyledLink';
@@ -109,6 +110,7 @@ const DesktopNav = ({ setOpen }: NavProps) => {
   const isAuthenticated = useAuthStore.useIsAuthenticated();
   const logout = useAuthStore.useLogout();
   const user = useAuthStore.useUser();
+  const cartItems = useCartStore.useItems();
 
   const handleLogout = () => {
     logout();
@@ -165,16 +167,19 @@ const DesktopNav = ({ setOpen }: NavProps) => {
         {/* Cart */}
         {isAuthenticated ? (
           <div className='flex'>
-            <a href='#' className='flex items-center p-2 -m-2 group'>
+            <UnstyledLink
+              href='/cart'
+              className='flex items-center p-2 -m-2 group'
+            >
               <HiOutlineShoppingBag
                 className='flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500'
                 aria-hidden='true'
               />
               <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-                0
+                {cartItems.length}
               </span>
               <span className='sr-only'>items in cart, view bag</span>
-            </a>
+            </UnstyledLink>
             <Menu as='div' className='relative ml-3 group'>
               {({ open }) => (
                 <>
