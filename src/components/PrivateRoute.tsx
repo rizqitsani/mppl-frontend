@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import { ImSpinner8 } from 'react-icons/im';
 
 import useAuthStore from '@/store/useAuthStore';
+import useCartStore from '@/store/useCartStore';
 
 import axiosClient from '@/lib/axios';
-import { UserInfoApi } from '@/types/api';
+import { CartApi, UserInfoApi } from '@/types/api';
 
 type PrivateRouteProps = {
   protectedRoutes: string[];
@@ -23,6 +24,8 @@ export default function PrivateRoute({
   const isLoading = useAuthStore.useIsLoading();
   const login = useAuthStore.useLogin();
   const stopLoading = useAuthStore.useStopLoading();
+
+  const populate = useCartStore.usePopulate();
 
   const isProtected = protectedRoutes.indexOf(router.pathname) !== -1;
 
@@ -41,6 +44,10 @@ export default function PrivateRoute({
           ...res.data.data,
           token: token + '',
         });
+
+        const cart = await axiosClient.get<CartApi>('/cart');
+
+        populate(cart.data.data.items, cart.data.data.total);
       } catch (err) {
         localStorage.removeItem('token');
       } finally {
