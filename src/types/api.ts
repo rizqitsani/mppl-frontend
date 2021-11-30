@@ -26,3 +26,16 @@ export interface Product {
   updated_at: string;
   photos: string[];
 }
+
+export interface Cart {
+  id: string;
+  user_id: string;
+  product_id: string;
+  quantity: number;
+  created_at: string;
+  updated_at: string;
+  product: {
+    name: string;
+    price: number;
+  };
+}
