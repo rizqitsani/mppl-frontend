@@ -23,6 +23,15 @@ export interface CartApi {
   };
 }
 
+export interface TransactionTokenApi {
+  message: string;
+  data: {
+    token: string;
+    redirect_url: string;
+    id: string;
+  };
+}
+
 export interface Product {
   id: string;
   name: string;

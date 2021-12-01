@@ -1,18 +1,31 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 import { RadioGroup } from '@headlessui/react';
 
 import { HiCheckCircle } from 'react-icons/hi';
 import clsx from 'clsx';
 
+import useAuthStore from '@/store/useAuthStore';
 import useCartStore from '@/store/useCartStore';
 
+import Button from '@/components/Button';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
 import UnstyledLink from '@/components/links/UnstyledLink';
+
+import axiosClient from '@/lib/axios';
 import { formatRupiah } from '@/lib/helper';
-import useAuthStore from '@/store/useAuthStore';
-import Button from '@/components/Button';
+import { TransactionTokenApi } from '@/types/api';
+import { defaultToastMessage } from '@/lib/constant';
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    snap: any;
+  }
+}
 
 const deliveryMethods = [
   {
@@ -29,14 +42,67 @@ export default function CheckoutPage() {
     deliveryMethods[0]
   );
 
+  const router = useRouter();
+
   const user = useAuthStore.useUser();
   const items = useCartStore.useItems();
   const cartTotal = useCartStore.useTotal();
+
+  if (items.length === 0) {
+    router.replace('/cart');
+  }
 
   const insuranceTotal =
     Math.ceil(((cartTotal + selectedDeliveryMethod.price) * 0.4) / 100 / 100) *
     100;
   const total = cartTotal + selectedDeliveryMethod.price + insuranceTotal;
+
+  React.useEffect(() => {
+    const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+    const myMidtransClientKey = 'SB-Mid-client-eR9yrTMdYx93pyak';
+
+    const scriptTag = document.createElement('script');
+    scriptTag.src = midtransScriptUrl;
+    scriptTag.setAttribute('data-client-key', myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
+
+  const handleCheckout = async () => {
+    toast.promise(
+      axiosClient
+        .post<TransactionTokenApi>('/transaction/token', {
+          total: cartTotal,
+          additional: selectedDeliveryMethod.price + insuranceTotal,
+        })
+        .then((res) => {
+          const { token, id } = res.data.data;
+          window.snap.pay(token, {
+            onError: function () {
+              axiosClient.delete('/transaction/delete', {
+                data: {
+                  transaction_id: id,
+                },
+              });
+            },
+            onClose: function () {
+              axiosClient.delete('/transaction/delete', {
+                data: {
+                  transaction_id: id,
+                },
+              });
+            },
+          });
+        }),
+      {
+        ...defaultToastMessage,
+        success: 'Berhasil melakukan pembayaran',
+      }
+    );
+  };
 
   return (
     <Layout>
@@ -207,8 +273,13 @@ export default function CheckoutPage() {
                 </dl>
 
                 <div className='mt-4'>
-                  <Button variant='primary' isFullWidth>
-                    Confirm order
+                  <Button
+                    type='button'
+                    variant='primary'
+                    onClick={handleCheckout}
+                    isFullWidth
+                  >
+                    Pilih Pembayaran
                   </Button>
                 </div>
               </div>
