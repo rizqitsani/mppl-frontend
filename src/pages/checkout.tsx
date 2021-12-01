@@ -1,40 +1,27 @@
 import * as React from 'react';
 import { RadioGroup } from '@headlessui/react';
-import { HiCheckCircle, HiTrash } from 'react-icons/hi';
+
+import { HiCheckCircle } from 'react-icons/hi';
 import clsx from 'clsx';
 
-import UnstyledLink from '@/components/links/UnstyledLink';
-import Layout from '@/components/layout/Layout';
+import useCartStore from '@/store/useCartStore';
 
-const products = [
-  {
-    id: 1,
-    title: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  // More products...
-];
+import NextImage from '@/components/NextImage';
+import Seo from '@/components/Seo';
+import Layout from '@/components/layout/Layout';
+import UnstyledLink from '@/components/links/UnstyledLink';
+import { formatRupiah } from '@/lib/helper';
+import useAuthStore from '@/store/useAuthStore';
+import Button from '@/components/Button';
 
 const deliveryMethods = [
   {
     id: 1,
-    title: 'Standard',
-    turnaround: '4–10 business days',
-    price: '$5.00',
+    title: 'Reguler',
+    turnaround: '3–6 hari',
+    price: 22000,
   },
-  { id: 2, title: 'Express', turnaround: '2–5 business days', price: '$16.00' },
-];
-
-const paymentMethods = [
-  { id: 'credit-card', title: 'Credit card' },
-  { id: 'paypal', title: 'PayPal' },
-  { id: 'etransfer', title: 'eTransfer' },
+  { id: 2, title: 'Express', turnaround: '1-2 hari', price: 27000 },
 ];
 
 export default function CheckoutPage() {
@@ -42,232 +29,78 @@ export default function CheckoutPage() {
     deliveryMethods[0]
   );
 
+  const user = useAuthStore.useUser();
+  const items = useCartStore.useItems();
+  const cartTotal = useCartStore.useTotal();
+
+  const insuranceTotal =
+    Math.ceil(((cartTotal + selectedDeliveryMethod.price) * 0.4) / 100 / 100) *
+    100;
+  const total = cartTotal + selectedDeliveryMethod.price + insuranceTotal;
+
   return (
     <Layout>
+      <Seo templateTitle='Checkout' />
+
       <main className='pt-16 pb-24 layout'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
-          <h1 className='sr-only'>Checkout</h1>
+          <h1 className='text-xl font-extrabold tracking-tight text-gray-900 sm:text-2xl'>
+            Checkout
+          </h1>
 
-          <form className='lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16'>
-            <div>
+          <form className='mt-8 lg:grid lg:grid-cols-3 lg:gap-x-6 xl:gap-x-10'>
+            <div className='space-y-6 divide-y-4 divide-gray-200 lg:col-span-2'>
               <div>
-                <h2 className='text-lg font-medium text-gray-900'>
-                  Contact information
+                <h2 className='text-base font-bold text-gray-900'>
+                  Alamat Pengiriman
                 </h2>
 
-                <div className='mt-4'>
-                  <label
-                    htmlFor='email-address'
-                    className='block text-sm font-medium text-gray-700'
-                  >
-                    Email address
-                  </label>
-                  <div className='mt-1'>
-                    <input
-                      type='email'
-                      id='email-address'
-                      name='email-address'
-                      autoComplete='email'
-                      className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                    />
-                  </div>
+                <div className='pt-4 mt-2 space-y-1 text-sm border-t border-gray-200'>
+                  <p className='font-semibold'>{user.name}</p>
+                  <p>{user.phone}</p>
+                  <p className='text-gray-500'>{user.address}</p>
                 </div>
               </div>
 
-              <div className='pt-10 mt-10 border-t border-gray-200'>
-                <h2 className='text-lg font-medium text-gray-900'>
-                  Shipping information
-                </h2>
+              <div className='pt-6'>
+                <h2 className='text-base font-bold text-gray-900'>Pesanan</h2>
 
-                <div className='grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
-                  <div>
-                    <label
-                      htmlFor='first-name'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      First name
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        id='first-name'
-                        name='first-name'
-                        autoComplete='given-name'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='last-name'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Last name
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        id='last-name'
-                        name='last-name'
-                        autoComplete='family-name'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-2'>
-                    <label
-                      htmlFor='company'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Company
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='company'
-                        id='company'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-2'>
-                    <label
-                      htmlFor='address'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Address
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='address'
-                        id='address'
-                        autoComplete='street-address'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-2'>
-                    <label
-                      htmlFor='apartment'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Apartment, suite, etc.
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='apartment'
-                        id='apartment'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='city'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      City
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='city'
-                        id='city'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='country'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Country
-                    </label>
-                    <div className='mt-1'>
-                      <select
-                        id='country'
-                        name='country'
-                        autoComplete='country'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      >
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                        <option>United States</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='province'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Province
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='province'
-                        id='province'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='postal-code'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Postal code
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='postal-code'
-                        id='postal-code'
-                        autoComplete='postal-code'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-2'>
-                    <label
-                      htmlFor='phone'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Phone
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='phone'
-                        id='phone'
-                        autoComplete='tel'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-                </div>
+                <ul role='list' className='divide-y divide-gray-200 '>
+                  {items.map((item) => (
+                    <li key={item.product_id} className='flex py-6 space-x-6'>
+                      <div className='w-24 h-24 overflow-hidden rounded-md'>
+                        <NextImage
+                          src={`/images/product-${
+                            (Math.floor(Math.random() * 3) % 2) + 1
+                          }.jpg`}
+                          alt={item.product.name}
+                          className='object-cover object-center w-full h-full'
+                          width='640'
+                          height='640'
+                        />
+                      </div>
+                      <div className='flex-auto space-y-1 text-sm font-medium'>
+                        <h3 className='text-sm text-gray-900'>
+                          <UnstyledLink href={`/products/${item.product_id}`}>
+                            {item.product.name}
+                          </UnstyledLink>
+                        </h3>
+                        <p className='text-gray-900'>
+                          {formatRupiah(item.product.price)}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className='pt-10 mt-10 border-t border-gray-200'>
+              <div className='pt-6'>
                 <RadioGroup
                   value={selectedDeliveryMethod}
                   onChange={setSelectedDeliveryMethod}
                 >
-                  <RadioGroup.Label className='text-lg font-medium text-gray-900'>
-                    Delivery method
+                  <RadioGroup.Label className='text-base font-bold text-gray-900'>
+                    Metode Pengiriman
                   </RadioGroup.Label>
 
                   <div className='grid grid-cols-1 mt-4 gap-y-6 sm:grid-cols-2 sm:gap-x-4'>
@@ -303,7 +136,7 @@ export default function CheckoutPage() {
                                   as='span'
                                   className='mt-6 text-sm font-medium text-gray-900'
                                 >
-                                  {deliveryMethod.price}
+                                  {formatRupiah(deliveryMethod.price)}
                                 </RadioGroup.Description>
                               </div>
                             </div>
@@ -330,232 +163,56 @@ export default function CheckoutPage() {
                   </div>
                 </RadioGroup>
               </div>
-
-              {/* Payment */}
-              <div className='pt-10 mt-10 border-t border-gray-200'>
-                <h2 className='text-lg font-medium text-gray-900'>Payment</h2>
-
-                <fieldset className='mt-4'>
-                  <legend className='sr-only'>Payment type</legend>
-                  <div className='space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10'>
-                    {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                      <div key={paymentMethod.id} className='flex items-center'>
-                        {paymentMethodIdx === 0 ? (
-                          <input
-                            id={paymentMethod.id}
-                            name='payment-type'
-                            type='radio'
-                            defaultChecked
-                            className='w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500'
-                          />
-                        ) : (
-                          <input
-                            id={paymentMethod.id}
-                            name='payment-type'
-                            type='radio'
-                            className='w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500'
-                          />
-                        )}
-
-                        <label
-                          htmlFor={paymentMethod.id}
-                          className='block ml-3 text-sm font-medium text-gray-700'
-                        >
-                          {paymentMethod.title}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </fieldset>
-
-                <div className='grid grid-cols-4 mt-6 gap-y-6 gap-x-4'>
-                  <div className='col-span-4'>
-                    <label
-                      htmlFor='card-number'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Card number
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        id='card-number'
-                        name='card-number'
-                        autoComplete='cc-number'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='col-span-4'>
-                    <label
-                      htmlFor='name-on-card'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Name on card
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        id='name-on-card'
-                        name='name-on-card'
-                        autoComplete='cc-name'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='col-span-3'>
-                    <label
-                      htmlFor='expiration-date'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      Expiration date (MM/YY)
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='expiration-date'
-                        id='expiration-date'
-                        autoComplete='cc-exp'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='cvc'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      CVC
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='cvc'
-                        id='cvc'
-                        autoComplete='csc'
-                        className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Order summary */}
-            <div className='mt-10 lg:mt-0'>
-              <h2 className='text-lg font-medium text-gray-900'>
-                Order summary
-              </h2>
+            <section aria-labelledby='summary-heading'>
+              <div className='px-3 py-6 mt-16 rounded-lg shadow-md sm:p-6 lg:p-6 lg:mt-0'>
+                <h2
+                  id='summary-heading'
+                  className='text-base font-bold text-gray-900'
+                >
+                  Ringkasan Belanja
+                </h2>
 
-              <div className='mt-4 bg-white border border-gray-200 rounded-lg shadow-sm'>
-                <h3 className='sr-only'>Items in your cart</h3>
-                <ul role='list' className='divide-y divide-gray-200'>
-                  {products.map((product) => (
-                    <li key={product.id} className='flex px-4 py-6 sm:px-6'>
-                      <div className='flex-shrink-0'>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={product.imageSrc}
-                          alt={product.imageAlt}
-                          className='w-20 rounded-md'
-                        />
-                      </div>
-
-                      <div className='flex flex-col flex-1 ml-6'>
-                        <div className='flex'>
-                          <div className='flex-1 min-w-0'>
-                            <h4 className='text-sm'>
-                              <a
-                                href={product.href}
-                                className='font-medium text-gray-700 hover:text-gray-800'
-                              >
-                                {product.title}
-                              </a>
-                            </h4>
-                            <p className='mt-1 text-sm text-gray-500'>
-                              {product.color}
-                            </p>
-                            <p className='mt-1 text-sm text-gray-500'>
-                              {product.size}
-                            </p>
-                          </div>
-
-                          <div className='flex-shrink-0 flow-root ml-4'>
-                            <button
-                              type='button'
-                              className='-m-2.5 bg-white p-2.5 flex items-center justify-center text-gray-400 hover:text-gray-500'
-                            >
-                              <span className='sr-only'>Remove</span>
-                              <HiTrash className='w-5 h-5' aria-hidden='true' />
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className='flex items-end justify-between flex-1 pt-2'>
-                          <p className='mt-1 text-sm font-medium text-gray-900'>
-                            {product.price}
-                          </p>
-
-                          <div className='ml-4'>
-                            <label htmlFor='quantity' className='sr-only'>
-                              Quantity
-                            </label>
-                            <select
-                              id='quantity'
-                              name='quantity'
-                              className='text-base font-medium text-left text-gray-700 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                            >
-                              <option value={1}>1</option>
-                              <option value={2}>2</option>
-                              <option value={3}>3</option>
-                              <option value={4}>4</option>
-                              <option value={5}>5</option>
-                              <option value={6}>6</option>
-                              <option value={7}>7</option>
-                              <option value={8}>8</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <dl className='px-4 py-6 space-y-6 border-t border-gray-200 sm:px-6'>
+                <dl className='mt-6 space-y-4'>
                   <div className='flex items-center justify-between'>
-                    <dt className='text-sm'>Subtotal</dt>
+                    <dt className='text-sm text-gray-600'>Total Harga</dt>
                     <dd className='text-sm font-medium text-gray-900'>
-                      $64.00
+                      {formatRupiah(cartTotal)}
                     </dd>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <dt className='text-sm'>Shipping</dt>
-                    <dd className='text-sm font-medium text-gray-900'>$5.00</dd>
+                    <dt className='text-sm text-gray-600'>
+                      Total Ongkos Kirim
+                    </dt>
+                    <dd className='text-sm font-medium text-gray-900'>
+                      {formatRupiah(selectedDeliveryMethod.price)}
+                    </dd>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <dt className='text-sm'>Taxes</dt>
-                    <dd className='text-sm font-medium text-gray-900'>$5.52</dd>
+                    <dt className='text-sm text-gray-600'>
+                      Asuransi Pengiriman
+                    </dt>
+                    <dd className='text-sm font-medium text-gray-900'>
+                      {formatRupiah(insuranceTotal)}
+                    </dd>
                   </div>
-                  <div className='flex items-center justify-between pt-6 border-t border-gray-200'>
-                    <dt className='text-base font-medium'>Total</dt>
-                    <dd className='text-base font-medium text-gray-900'>
-                      $75.52
+                  <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
+                    <dt className='text-lg font-bold text-gray-900'>Total</dt>
+                    <dd className='text-lg font-bold text-gray-900'>
+                      {formatRupiah(total)}
                     </dd>
                   </div>
                 </dl>
 
-                <div className='px-4 py-6 border-t border-gray-200 sm:px-6'>
-                  <UnstyledLink
-                    href='/orders/1'
-                    className='flex justify-center w-full px-4 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
-                  >
+                <div className='mt-4'>
+                  <Button variant='primary' isFullWidth>
                     Confirm order
-                  </UnstyledLink>
+                  </Button>
                 </div>
               </div>
-            </div>
+            </section>
           </form>
         </div>
       </main>
