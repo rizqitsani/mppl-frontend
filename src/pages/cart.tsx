@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 
-import { HiInformationCircle, HiQuestionMarkCircle, HiX } from 'react-icons/hi';
+import { HiInformationCircle, HiX } from 'react-icons/hi';
 
 import useCartStore from '@/store/useCartStore';
 
@@ -15,6 +15,7 @@ import axiosClient from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
 import { formatRupiah } from '@/lib/helper';
 import { CartApi } from '@/types/api';
+import ButtonLink from '@/components/links/ButtonLink';
 
 export default function CartPage() {
   const populate = useCartStore.usePopulate();
@@ -185,75 +186,37 @@ export default function CartPage() {
               {/* Order summary */}
               <section
                 aria-labelledby='summary-heading'
-                className='px-4 py-6 mt-16 rounded-lg bg-gray-50 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5'
+                className='px-3 py-6 mt-16 rounded-lg shadow-md sm:p-6 lg:p-6 lg:mt-0 lg:col-span-5'
               >
                 <h2
                   id='summary-heading'
-                  className='text-lg font-medium text-gray-900'
+                  className='text-lg font-bold text-gray-900'
                 >
-                  Order summary
+                  Ringkasan Belanja
                 </h2>
 
                 <dl className='mt-6 space-y-4'>
                   <div className='flex items-center justify-between'>
-                    <dt className='text-sm text-gray-600'>Subtotal</dt>
+                    <dt className='text-sm text-gray-600'>Total Harga</dt>
                     <dd className='text-sm font-medium text-gray-900'>
                       {formatRupiah(data?.total)}
                     </dd>
                   </div>
+
                   <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                    <dt className='flex items-center text-sm text-gray-600'>
-                      <span>Shipping estimate</span>
-                      <a
-                        href='#'
-                        className='flex-shrink-0 ml-2 text-gray-400 hover:text-gray-500'
-                      >
-                        <span className='sr-only'>
-                          Learn more about how shipping is calculated
-                        </span>
-                        <HiQuestionMarkCircle
-                          className='w-5 h-5'
-                          aria-hidden='true'
-                        />
-                      </a>
-                    </dt>
-                    <dd className='text-sm font-medium text-gray-900'>$5.00</dd>
-                  </div>
-                  <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                    <dt className='flex text-sm text-gray-600'>
-                      <span>Tax estimate</span>
-                      <a
-                        href='#'
-                        className='flex-shrink-0 ml-2 text-gray-400 hover:text-gray-500'
-                      >
-                        <span className='sr-only'>
-                          Learn more about how tax is calculated
-                        </span>
-                        <HiQuestionMarkCircle
-                          className='w-5 h-5'
-                          aria-hidden='true'
-                        />
-                      </a>
-                    </dt>
-                    <dd className='text-sm font-medium text-gray-900'>$8.32</dd>
-                  </div>
-                  <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                    <dt className='text-base font-medium text-gray-900'>
-                      Order total
+                    <dt className='text-base font-bold text-gray-900'>
+                      Total Harga
                     </dt>
                     <dd className='text-base font-medium text-gray-900'>
-                      $112.32
+                      {formatRupiah(data?.total)}
                     </dd>
                   </div>
                 </dl>
 
-                <div className='mt-6'>
-                  <UnstyledLink
-                    href='/checkout'
-                    className='flex justify-center w-full px-4 py-3 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500'
-                  >
-                    Checkout
-                  </UnstyledLink>
+                <div className='mt-4'>
+                  <ButtonLink variant='primary' href='/checkout' isFullWidth>
+                    Beli
+                  </ButtonLink>
                 </div>
               </section>
             </>
