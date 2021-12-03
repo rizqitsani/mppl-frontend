@@ -76,7 +76,8 @@ export default function CheckoutPage() {
       axiosClient
         .post<TransactionTokenApi>('/transaction/token', {
           total: cartTotal,
-          additional: selectedDeliveryMethod.price + insuranceTotal,
+          shipping: selectedDeliveryMethod.price,
+          insurance: insuranceTotal,
         })
         .then((res) => {
           const { token, id } = res.data.data;
