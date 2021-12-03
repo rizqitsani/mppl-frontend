@@ -10,11 +10,12 @@ export function formatRupiah(number: number) {
   return Intl.NumberFormat('id', {
     style: 'currency',
     currency: 'IDR',
+    maximumFractionDigits: 0,
   }).format(number);
 }
 
-export function formatDate(date: string) {
-  return format(parseISO(date), 'dd MMMM yyyy', {
+export function formatDate(date: string, formatString = 'dd MMMM yyyy') {
+  return format(parseISO(date), formatString, {
     locale: idLocale,
   });
 }

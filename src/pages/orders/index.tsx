@@ -5,15 +5,20 @@ import { HiInformationCircle } from 'react-icons/hi';
 import useRQWithToast from '@/hooks/useRQWithToast';
 
 import NextImage from '@/components/NextImage';
+import Button from '@/components/Button';
 import Seo from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
 import UnstyledLink from '@/components/links/UnstyledLink';
+import OrderDetail from '@/components/orders/OrderDetail';
 
 import { formatDate, formatRupiah } from '@/lib/helper';
-import { TransactionApi } from '@/types/api';
-import ButtonLink from '@/components/links/ButtonLink';
+import { Transaction, TransactionApi } from '@/types/api';
 
 export default function OrderListPage() {
+  const [showDetailModal, setShowDetailModal] = React.useState(false);
+  const [currentTransaction, setCurrentTransaction] =
+    React.useState<Transaction>(null);
+
   const { data: queryData } = useRQWithToast(
     useQuery<TransactionApi, Error>('/transaction')
   );
@@ -22,6 +27,14 @@ export default function OrderListPage() {
   return (
     <Layout>
       <Seo templateTitle='Pesanan Saya' />
+
+      {currentTransaction && (
+        <OrderDetail
+          data={currentTransaction}
+          open={showDetailModal}
+          setOpen={setShowDetailModal}
+        />
+      )}
 
       <div className='py-16 lg:pb-24 min-h-minimal layout'>
         <div className='max-w-xl'>
@@ -101,15 +114,18 @@ export default function OrderListPage() {
                         </dd>
                       </div>
                     </dl>
-                    <ButtonLink
+                    <Button
                       variant='primary'
-                      href={`/orders/${transaction.id}`}
+                      onClick={() => {
+                        setShowDetailModal(true);
+                        setCurrentTransaction(transaction);
+                      }}
                     >
                       Lihat Detail
                       <span className='sr-only'>
                         for order {transaction.id}
                       </span>
-                    </ButtonLink>
+                    </Button>
                   </div>
 
                   <table className='w-full mt-4 text-gray-500 sm:mt-6'>

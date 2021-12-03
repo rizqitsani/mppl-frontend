@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const protectedRoutes = ['/cart', '/checkout', '/orders', '/orders/[id]'];
+  const protectedRoutes = ['/cart', '/checkout', '/orders'];
 
   return (
     <QueryClientProvider client={queryClient}>
