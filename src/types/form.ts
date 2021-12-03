@@ -4,3 +4,7 @@ export type ProductData = {
   stock: number;
   status: string;
 };
+
+export type TransactionData = {
+  status: string;
+};
