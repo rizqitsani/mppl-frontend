@@ -8,6 +8,7 @@ import {
   HiOutlineUser,
   HiOutlineX,
 } from 'react-icons/hi';
+import clsx from 'clsx';
 
 import useAuthStore from '@/store/useAuthStore';
 import useCartStore from '@/store/useCartStore';
@@ -184,7 +185,7 @@ const DesktopNav = ({ setOpen }: NavProps) => {
               {({ open }) => (
                 <>
                   <div>
-                    <Menu.Button className='flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400 lg:p-2 lg:rounded-md lg:hover:bg-gray-50'>
+                    <Menu.Button className='flex items-center max-w-xs text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400 lg:p-2 lg:rounded-md '>
                       <HiOutlineUser className='flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500' />
                       <span className='hidden ml-3 text-sm font-medium text-gray-700 lg:block'>
                         <span className='sr-only'>Open user menu for </span>
@@ -210,12 +211,34 @@ const DesktopNav = ({ setOpen }: NavProps) => {
                       static
                       className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
                     >
-                      <button
-                        onClick={handleLogout}
-                        className='block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100'
-                      >
-                        Logout
-                      </button>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <UnstyledLink
+                            href='/orders'
+                            className={clsx(
+                              active ? 'bg-gray-100' : 'bg-white',
+                              'block w-full px-4 py-2',
+                              'text-sm text-left text-gray-700'
+                            )}
+                          >
+                            Pesanan Saya
+                          </UnstyledLink>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={handleLogout}
+                            className={clsx(
+                              active ? 'bg-gray-100' : 'bg-white',
+                              'block w-full px-4 py-2',
+                              'text-sm text-left text-gray-700'
+                            )}
+                          >
+                            Logout
+                          </button>
+                        )}
+                      </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </>
