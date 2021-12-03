@@ -83,18 +83,10 @@ export default function CheckoutPage() {
           const { token, id } = res.data.data;
           window.snap.pay(token, {
             onError: function () {
-              axiosClient.delete('/transaction/delete', {
-                data: {
-                  transaction_id: id,
-                },
-              });
+              axiosClient.delete(`/transaction/${id}`);
             },
             onClose: function () {
-              axiosClient.delete('/transaction/delete', {
-                data: {
-                  transaction_id: id,
-                },
-              });
+              axiosClient.delete(`/transaction/${id}`);
             },
           });
         }),
