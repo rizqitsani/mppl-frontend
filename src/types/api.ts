@@ -32,6 +32,35 @@ export interface TransactionTokenApi {
   };
 }
 
+export interface TransactionApi {
+  message: string;
+  data: Transaction[];
+}
+
+export interface Transaction {
+  id: string;
+  user_id: string;
+  midtrans_id: string;
+  total: number;
+  shipping_cost: number;
+  insurance_cost: number;
+  payment_type: string;
+  transaction_status: string;
+  shipment_status: string;
+  fraud_status: string;
+  transaction_time: string;
+  settlement_time: string;
+  items: {
+    id: string;
+    quantity: number;
+    product: {
+      id: string;
+      name: string;
+      price: number;
+    };
+  }[];
+}
+
 export interface Product {
   id: string;
   name: string;
