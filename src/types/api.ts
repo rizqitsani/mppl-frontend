@@ -70,7 +70,10 @@ export interface Product {
   available: false;
   created_at: string;
   updated_at: string;
-  photos: string[];
+  photos: {
+    id: string;
+    photo_link: string;
+  }[];
 }
 
 export interface Cart {

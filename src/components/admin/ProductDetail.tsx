@@ -9,10 +9,13 @@ import clsx from 'clsx';
 
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import NextImage from '@/components/NextImage';
+import DropzoneInput from '@/components/forms/DropzoneInput';
 import Input from '@/components/forms/Input';
 import Select from '@/components/forms/SelectInput';
+import TextArea from '@/components/forms/TextArea';
 
-import axiosClient from '@/lib/axios';
+import axiosClient, { baseUrl } from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
 import { Product } from '@/types/api';
 import { ProductData } from '@/types/form';
@@ -36,13 +39,29 @@ export default function ProductDetail({
   const methods = useForm<ProductData>({
     defaultValues: {
       name: data.name,
+      description: data.description,
       price: data.price.toString(),
       stock: data.stock,
       status: data.available ? 'active' : 'non',
     },
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
+
+  React.useEffect(() => {
+    reset({
+      name: data.name,
+      description: data.description,
+      price: data.price.toString(),
+      stock: data.stock,
+      status: data.available ? 'active' : 'non',
+    });
+  }, [data, reset]);
+
+  const closeModal = () => {
+    setOpen(false);
+    setIsEditing(false);
+  };
 
   const handleDeleteProduct = () => {
     toast.promise(
@@ -52,8 +71,7 @@ export default function ProductDetail({
           queryClient.refetchQueries(['get-products']);
         })
         .finally(() => {
-          setIsEditing(false);
-          setOpen(false);
+          closeModal();
         }),
       {
         ...defaultToastMessage,
@@ -62,24 +80,34 @@ export default function ProductDetail({
     );
   };
 
-  const handleEditProduct = (formData: ProductData) => {
+  const handleEditProduct = (updatedData: ProductData) => {
+    const formData = new FormData();
+
     const newBody = {
-      name: formData.name,
-      price: formData.price,
-      stock: formData.stock,
-      available: formData.status == 'active',
+      name: updatedData.name,
+      description: updatedData.description,
+      price: updatedData.price,
+      stock: updatedData.stock,
+      available: updatedData.status == 'active',
     };
+
+    for (const key in newBody) {
+      formData.append(key, newBody[key]);
+    }
+
+    if (updatedData.image) {
+      updatedData.image.map((image) => formData.append('image', image));
+    }
 
     toast.promise(
       axiosClient
-        .put(`/products/${data.id}`, newBody)
+        .put(`/products/${data.id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
         .then(() => {
           queryClient.refetchQueries(['get-products']);
         })
-        .finally(() => {
-          setIsEditing(false);
-          setOpen(false);
-        }),
+        .finally(() => closeModal()),
       {
         ...defaultToastMessage,
         success: 'Berhasil mengubah produk!',
@@ -98,10 +126,10 @@ export default function ProductDetail({
             >
               Detail Produk
             </Dialog.Title>
-            <div className='space-x-2'>
+            <div className='space-x-3'>
               <button
                 type='button'
-                className='text-red-400 bg-white rounded-md hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400'
+                className='text-gray-400 bg-white rounded-md hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400'
                 ref={cancelButtonRef}
                 onClick={handleDeleteProduct}
               >
@@ -111,7 +139,7 @@ export default function ProductDetail({
                 type='button'
                 className='text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400'
                 ref={cancelButtonRef}
-                onClick={() => setOpen(false)}
+                onClick={() => closeModal()}
               >
                 <HiX className='w-6 h-6' aria-hidden='true' />
               </button>
@@ -129,6 +157,14 @@ export default function ProductDetail({
                     id='name'
                     validation={{
                       required: 'Nama Produk tidak boleh kosong',
+                    }}
+                  />
+
+                  <TextArea
+                    label='Deskripsi'
+                    id='description'
+                    validation={{
+                      required: 'Deskripsi tidak boleh kosong',
                     }}
                   />
 
@@ -158,6 +194,14 @@ export default function ProductDetail({
                     }}
                   />
 
+                  <DropzoneInput
+                    label='Foto Produk'
+                    id='image'
+                    accept='image/png, image/jpg, image/jpeg'
+                    maxFiles={4}
+                    helperText='Kosongkan apabila tidak ingin mengubah gambar. File yang dapat diupload berupa .png, .jpg, atau .jpeg'
+                  />
+
                   <Select
                     label='Status Produk'
                     id='status'
@@ -182,12 +226,39 @@ export default function ProductDetail({
                     <dd className='mt-1 text-sm text-gray-900'>{data.name}</dd>
                   </div>
                   <div className='sm:col-span-2'>
+                    <dt className='text-sm font-medium text-gray-900'>
+                      Deskripsi
+                    </dt>
+                    <dd className='mt-1 text-sm text-gray-900'>
+                      {data.description}
+                    </dd>
+                  </div>
+                  <div className='sm:col-span-2'>
                     <dt className='text-sm font-medium text-gray-900'>Harga</dt>
                     <dd className='mt-1 text-sm text-gray-900'>{data.price}</dd>
                   </div>
                   <div className='sm:col-span-2'>
                     <dt className='text-sm font-medium text-gray-900'>Stok</dt>
                     <dd className='mt-1 text-sm text-gray-900'>{data.stock}</dd>
+                  </div>
+                  <div className='sm:col-span-2'>
+                    <dt className='text-sm font-medium text-gray-900'>
+                      Gambar Produk
+                    </dt>
+                    <dd className='grid grid-cols-3 gap-4 mt-1'>
+                      {data.photos.map((photo) => (
+                        <div key={photo.id} className='aspect-w-1 aspect-h-1'>
+                          <NextImage
+                            src={`${baseUrl}/static/images/${photo.photo_link}`}
+                            alt={data.name}
+                            className='w-full h-full sm:w-full sm:h-full'
+                            imgClassName='object-contain'
+                            width='640'
+                            height='640'
+                          />
+                        </div>
+                      ))}
+                    </dd>
                   </div>
                   <div className='sm:col-span-2'>
                     <dt className='text-sm font-medium text-gray-900'>
@@ -244,7 +315,7 @@ export default function ProductDetail({
               <Button
                 variant='light'
                 type='button'
-                onClick={() => setOpen(false)}
+                onClick={() => closeModal()}
                 className='w-full sm:w-auto'
               >
                 Kembali
