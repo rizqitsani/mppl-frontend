@@ -3,9 +3,11 @@ import * as React from 'react';
 import { ImSpinner2 } from 'react-icons/im';
 
 enum ButtonVariant {
-  'dark',
-  'light',
   'primary',
+  'outline',
+  'ghost',
+  'light',
+  'dark',
 }
 
 type ButtonProps = {
@@ -20,7 +22,7 @@ export default function Button({
   disabled: buttonDisabled,
   isFullWidth,
   isLoading,
-  variant = 'dark',
+  variant = 'primary',
   ...rest
 }: ButtonProps) {
   const disabled = isLoading || buttonDisabled;
@@ -30,22 +32,45 @@ export default function Button({
       {...rest}
       disabled={disabled}
       className={clsx(
-        'py-2 px-4 rounded text-sm hover:text-teal-400 font-medium',
-        'border shadow-sm',
-        'focus:outline-none focus-visible:text-teal-400',
-        variant === 'primary'
-          ? 'bg-teal-400 text-white hover:bg-teal-400/90 hover:text-white border-teal-500 disabled:hover:bg-teal-400 disabled:brightness-75  focus-visible:text-dark'
-          : variant === 'light'
-          ? 'bg-white disabled:bg-gray-200 text-dark hover:bg-gray-200 hover:text-dark focus-visible:text-dark border-gray-400 disabled:hover:text-dark'
-          : variant === 'dark'
-          ? 'bg-dark disabled:bg-gray-700 text-white disabled:hover:text-white'
-          : 'border-gray-600',
+        className,
+        'inline-flex px-4 py-2 font-semibold rounded',
+        'focus:outline-none focus-visible:ring focus-visible:ring-teal-500',
+        'shadow-sm',
+        'transition-colors duration-75',
+        [
+          variant === 'primary' && [
+            'bg-teal-400 text-white',
+            'border border-teal-500',
+            'hover:bg-teal-500 hover:text-white',
+            'active:bg-teal-600',
+            'disabled:bg-teal-600 disabled:hover:bg-teal-600',
+          ],
+          variant === 'outline' && [
+            'text-teal-500',
+            'border border-teal-500',
+            'hover:bg-teal-50 active:bg-teal-100 disabled:bg-teal-100',
+          ],
+          variant === 'ghost' && [
+            'text-teal-500',
+            'shadow-none',
+            'hover:bg-teal-50 active:bg-teal-100 disabled:bg-teal-100',
+          ],
+          variant === 'light' && [
+            'bg-white text-dark ',
+            'border border-gray-300',
+            'hover:text-dark hover:bg-gray-100',
+            'active:bg-white/80 disabled:bg-gray-200',
+          ],
+          variant === 'dark' && [
+            'bg-gray-900 text-white',
+            'border border-gray-600',
+            'hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-700',
+          ],
+        ],
         'disabled:cursor-not-allowed',
-        !disabled && 'animated-underline',
-        isLoading &&
-          'relative text-transparent hover:!text-transparent !cursor-wait transition-none',
         isFullWidth && 'w-full',
-        className
+        isLoading &&
+          'relative !text-transparent hover:!text-transparent !cursor-wait !transition-none'
       )}
     >
       {isLoading && (

@@ -176,7 +176,7 @@ export default function ProductDetailPage() {
                   </div>
 
                   <form className='mt-6'>
-                    <div className='flex mt-10 sm:flex-col1'>
+                    <div className='flex items-center mt-10'>
                       <Button
                         type='button'
                         variant='primary'
