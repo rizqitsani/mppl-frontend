@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider, QueryOptions } from 'react-query';
 
+import 'react-image-lightbox/style.css';
 import '@/styles/globals.css';
 import PrivateRoute from '@/components/PrivateRoute';
 import axiosClient from '@/lib/axios';
