@@ -8,11 +8,26 @@ import ProductCard from '@/components/products/ProductCard';
 
 import { ProductApi } from '@/types/api';
 
+export type PriceFilter = {
+  min: number;
+  max: number;
+};
+
 export default function ProductListPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
+  const [priceFilter, setPriceFilter] = React.useState<PriceFilter>(null);
 
   const { data: queryData } = useQuery<ProductApi, Error>('/products');
   const data = queryData?.data ?? [];
+
+  const filteredData = data.filter((product) => {
+    if (priceFilter)
+      return (
+        product.price >= priceFilter.min && product.price <= priceFilter.max
+      );
+
+    return true;
+  });
 
   return (
     <Layout>
@@ -22,7 +37,9 @@ export default function ProductListPage() {
         {/* Mobile filter dialog */}
         <FilterMenu.Mobile
           open={mobileFiltersOpen}
+          priceFilter={priceFilter}
           setOpen={setMobileFiltersOpen}
+          setPriceFilter={setPriceFilter}
         />
 
         <main className='layout'>
@@ -38,7 +55,9 @@ export default function ProductListPage() {
           <div className='pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4'>
             <FilterMenu.Desktop
               open={mobileFiltersOpen}
+              priceFilter={priceFilter}
               setOpen={setMobileFiltersOpen}
+              setPriceFilter={setPriceFilter}
             />
 
             <section
@@ -49,9 +68,9 @@ export default function ProductListPage() {
                 Products
               </h2>
 
-              {data ? (
+              {filteredData ? (
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3'>
-                  {data.map((product) => (
+                  {filteredData.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>

@@ -4,50 +4,34 @@ import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { HiChevronDown, HiOutlineX, HiPlusSm } from 'react-icons/hi';
 import clsx from 'clsx';
 
+import { PriceFilter } from '@/pages/products';
+import Button from '@/components/Button';
+
 const filters = [
   {
-    id: 'color',
-    name: 'Warna',
+    id: 'price',
+    name: 'Harga',
     options: [
-      { value: 'white', label: 'Putih' },
-      { value: 'beige', label: 'Krem' },
-      { value: 'blue', label: 'Biru' },
-      { value: 'brown', label: 'Cokelat' },
-      { value: 'green', label: 'Hijau' },
-      { value: 'purple', label: 'Ungu' },
-    ],
-  },
-  {
-    id: 'category',
-    name: 'Kategori',
-    options: [
-      { value: 'new-arrivals', label: 'Barang Baru' },
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'sweatshirts', label: 'Sweatshirts' },
-      { value: 'pants-shorts', label: 'Pants & Shorts' },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Ukuran',
-    options: [
-      { value: 'xs', label: 'XS' },
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
-      { value: 'xl', label: 'XL' },
-      { value: '2xl', label: '2XL' },
+      { value: '0', label: 'Rp200 rb - Rp500 rb', min: 200000, max: 500000 },
+      { value: '1', label: 'Rp500 rb - Rp1 jt', min: 500001, max: 1000000 },
+      { value: '2', label: 'Rp1 jt - Rp3 jt', min: 1000001, max: 3000000 },
     ],
   },
 ];
 
 type FilterMenuProps = {
   open: boolean;
+  priceFilter: PriceFilter;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setPriceFilter: React.Dispatch<React.SetStateAction<PriceFilter>>;
 };
 
-const MobileFilterMenu = ({ open, setOpen }: FilterMenuProps) => (
+const MobileFilterMenu = ({
+  open,
+  priceFilter,
+  setOpen,
+  setPriceFilter,
+}: FilterMenuProps) => (
   <Transition.Root show={open} as={React.Fragment}>
     <Dialog
       as='div'
@@ -121,9 +105,17 @@ const MobileFilterMenu = ({ open, setOpen }: FilterMenuProps) => (
                             <input
                               id={`${section.id}-${optionIdx}-mobile`}
                               name={`${section.id}[]`}
-                              defaultValue={option.value}
-                              type='checkbox'
-                              className='w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500'
+                              value={option.value}
+                              type='radio'
+                              onChange={() =>
+                                setPriceFilter((status) => ({
+                                  ...status,
+                                  min: option.min,
+                                  max: option.max,
+                                }))
+                              }
+                              checked={priceFilter?.min === option.min}
+                              className='w-4 h-4 text-teal-600 border-gray-300 rounded-full focus:ring-teal-500'
                             />
                             <label
                               htmlFor={`${section.id}-${optionIdx}-mobile`}
@@ -140,13 +132,25 @@ const MobileFilterMenu = ({ open, setOpen }: FilterMenuProps) => (
               </Disclosure>
             ))}
           </form>
+          <Button
+            type='button'
+            variant='outline'
+            onClick={() => setPriceFilter(null)}
+            className='justify-center mx-4'
+          >
+            Hapus Filter
+          </Button>
         </div>
       </Transition.Child>
     </Dialog>
   </Transition.Root>
 );
 
-const DesktopFilterMenu = ({ setOpen }: FilterMenuProps) => (
+const DesktopFilterMenu = ({
+  priceFilter,
+  setOpen,
+  setPriceFilter,
+}: FilterMenuProps) => (
   <aside>
     <h2 className='sr-only'>Filter</h2>
 
@@ -163,7 +167,7 @@ const DesktopFilterMenu = ({ setOpen }: FilterMenuProps) => (
     </button>
 
     <div className='hidden lg:block'>
-      <form className='space-y-10 divide-y divide-gray-200'>
+      <form className='space-y-10'>
         {filters.map((section, sectionIdx) => (
           <div key={section.name} className={sectionIdx === 0 ? null : 'pt-10'}>
             <fieldset>
@@ -176,9 +180,17 @@ const DesktopFilterMenu = ({ setOpen }: FilterMenuProps) => (
                     <input
                       id={`${section.id}-${optionIdx}`}
                       name={`${section.id}[]`}
-                      defaultValue={option.value}
-                      type='checkbox'
-                      className='w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500'
+                      value={option.value}
+                      type='radio'
+                      onChange={() =>
+                        setPriceFilter((status) => ({
+                          ...status,
+                          min: option.min,
+                          max: option.max,
+                        }))
+                      }
+                      checked={priceFilter?.min === option.min}
+                      className='w-4 h-4 text-teal-600 border-gray-300 rounded-full focus:ring-teal-500'
                     />
                     <label
                       htmlFor={`${section.id}-${optionIdx}`}
@@ -192,6 +204,13 @@ const DesktopFilterMenu = ({ setOpen }: FilterMenuProps) => (
             </fieldset>
           </div>
         ))}
+        <Button
+          type='button'
+          variant='outline'
+          onClick={() => setPriceFilter(null)}
+        >
+          Hapus Filter
+        </Button>
       </form>
     </div>
   </aside>
