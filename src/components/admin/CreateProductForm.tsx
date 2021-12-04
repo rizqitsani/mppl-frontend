@@ -8,8 +8,10 @@ import { HiX } from 'react-icons/hi';
 
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import DropzoneInput from '@/components/forms/DropzoneInput';
 import Input from '@/components/forms/Input';
 import Select from '@/components/forms/SelectInput';
+import TextArea from '@/components/forms/TextArea';
 
 import axiosClient from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
@@ -32,16 +34,27 @@ export default function CreateProductForm({
   const { handleSubmit, reset } = methods;
 
   const handleCreateProduct = (data: ProductData) => {
+    const formData = new FormData();
+
     const newBody = {
       name: data.name,
+      description: data.description,
       price: data.price,
       stock: data.stock,
       available: data.status == 'active',
     };
 
+    for (const key in newBody) {
+      formData.append(key, newBody[key]);
+    }
+
+    data.image.map((image) => formData.append('image', image));
+
     toast.promise(
       axiosClient
-        .post('/products', newBody)
+        .post('/products', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
         .then(() => {
           queryClient.refetchQueries(['get-products']);
         })
@@ -87,6 +100,14 @@ export default function CreateProductForm({
                   }}
                 />
 
+                <TextArea
+                  label='Deskripsi'
+                  id='description'
+                  validation={{
+                    required: 'Deskripsi tidak boleh kosong',
+                  }}
+                />
+
                 <Input
                   label='Harga'
                   id='price'
@@ -110,6 +131,17 @@ export default function CreateProductForm({
                       value: 0,
                       message: 'Stok tidak boleh dibawah 0',
                     },
+                  }}
+                />
+
+                <DropzoneInput
+                  label='Foto Produk'
+                  id='image'
+                  accept='image/png, image/jpg, image/jpeg'
+                  maxFiles={4}
+                  helperText='File yang dapat diupload berupa .png, .jpg, atau .jpeg'
+                  validation={{
+                    required: 'Foto Produk tidak boleh kosong',
                   }}
                 />
 

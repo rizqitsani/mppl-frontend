@@ -7,6 +7,6 @@ module.exports = {
   reactStrictMode: true,
 
   images: {
-    domains: ['ui-avatars.com'],
+    domains: ['ui-avatars.com', '127.0.0.1'],
   },
 };
