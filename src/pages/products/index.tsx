@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
 
-import FilterMenu from '@/components/products/FilterMenu';
+import Seo from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
+import FilterMenu from '@/components/products/FilterMenu';
+import ProductCard from '@/components/products/ProductCard';
 
 import { ProductApi } from '@/types/api';
-import ProductCard from '@/components/products/ProductCard';
 
 export default function ProductListPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
@@ -15,6 +16,8 @@ export default function ProductListPage() {
 
   return (
     <Layout>
+      <Seo templateTitle='Daftar Produk' />
+
       <div>
         {/* Mobile filter dialog */}
         <FilterMenu.Mobile

@@ -16,6 +16,7 @@ import useCartStore from '@/store/useCartStore';
 
 import Button from '@/components/Button';
 import NextImage from '@/components/NextImage';
+import Seo from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
 
 import { formatRupiah } from '@/lib/helper';
@@ -89,6 +90,8 @@ export default function ProductDetailPage() {
 
   return (
     <Layout>
+      <Seo templateTitle={data?.name} />
+
       <main className='pt-14 sm:pt-16 layout'>
         <div className='max-w-2xl mx-auto lg:max-w-none'>
           {/* Product */}
