@@ -11,7 +11,7 @@ import Seo from '@/components/Seo';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Layout from '@/components/layout/Layout';
 
-import axiosClient from '@/lib/axios';
+import axiosClient, { baseUrl } from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
 import { formatRupiah } from '@/lib/helper';
 import { CartApi } from '@/types/api';
@@ -112,9 +112,7 @@ export default function CartPage() {
                       <div className='flex-shrink-0'>
                         <div className='w-24 h-24 overflow-hidden rounded-md sm:w-48 sm:h-48'>
                           <NextImage
-                            src={`/images/product-${
-                              (Math.floor(Math.random() * 3) % 2) + 1
-                            }.jpg`}
+                            src={`${baseUrl}/static/images/${item.product.photos[0].photo_link}`}
                             alt={item.product.name}
                             className='object-cover object-center w-full h-full'
                             width='640'

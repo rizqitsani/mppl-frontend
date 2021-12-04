@@ -15,7 +15,7 @@ import Seo from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
-import axiosClient from '@/lib/axios';
+import axiosClient, { baseUrl } from '@/lib/axios';
 import { formatRupiah } from '@/lib/helper';
 import { TransactionTokenApi } from '@/types/api';
 import { defaultToastMessage } from '@/lib/constant';
@@ -129,9 +129,7 @@ export default function CheckoutPage() {
                     <li key={item.product_id} className='flex py-6 space-x-6'>
                       <div className='w-24 h-24 overflow-hidden rounded-md'>
                         <NextImage
-                          src={`/images/product-${
-                            (Math.floor(Math.random() * 3) % 2) + 1
-                          }.jpg`}
+                          src={`${baseUrl}/static/images/${item.product.photos[0].photo_link}`}
                           alt={item.product.name}
                           className='object-cover object-center w-full h-full'
                           width='640'

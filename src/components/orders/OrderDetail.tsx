@@ -5,10 +5,11 @@ import { HiX } from 'react-icons/hi';
 
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import NextImage from '@/components/NextImage';
 
+import { baseUrl } from '@/lib/axios';
 import { Transaction } from '@/types/api';
 import { formatDate, formatRupiah } from '@/lib/helper';
-import NextImage from '../NextImage';
 
 const paymentMethods = {
   bank_transfer: 'Virtual Account',
@@ -77,7 +78,7 @@ export default function OrderDetail({ data, open, setOpen }: OrderDetailProps) {
                     <div className='flex-shrink-0'>
                       <div className='overflow-hidden rounded-md w-14 h-14'>
                         <NextImage
-                          src={`/images/1.jpg`}
+                          src={`${baseUrl}/static/images/${item.product.photos[0].photo_link}`}
                           alt={item.product.name}
                           className='object-cover object-center w-full h-full'
                           width='640'

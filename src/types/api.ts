@@ -57,6 +57,10 @@ export interface Transaction {
       id: string;
       name: string;
       price: number;
+      photos: {
+        id: string;
+        photo_link: string;
+      }[];
     };
   }[];
 }
@@ -86,5 +90,9 @@ export interface Cart {
   product: {
     name: string;
     price: number;
+    photos: {
+      id: string;
+      photo_link: string;
+    }[];
   };
 }

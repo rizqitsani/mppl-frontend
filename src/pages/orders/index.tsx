@@ -11,6 +11,7 @@ import Layout from '@/components/layout/Layout';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import OrderDetail from '@/components/orders/OrderDetail';
 
+import { baseUrl } from '@/lib/axios';
 import { formatDate, formatRupiah } from '@/lib/helper';
 import { Transaction, TransactionApi } from '@/types/api';
 
@@ -159,9 +160,7 @@ export default function OrderListPage() {
                             <div className='flex items-center'>
                               <div className='w-16 h-16 overflow-hidden rounded-md'>
                                 <NextImage
-                                  src={`/images/product-${
-                                    (Math.floor(Math.random() * 3) % 2) + 1
-                                  }.jpg`}
+                                  src={`${baseUrl}/static/images/${item.product.photos[0].photo_link}`}
                                   alt={item.product.name}
                                   className='object-cover object-center w-full h-full'
                                   width='640'

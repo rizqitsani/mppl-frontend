@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import NextImage from '@/components/NextImage';
 
+import { baseUrl } from '@/lib/axios';
 import { formatRupiah } from '@/lib/helper';
 import { Product } from '@/types/api';
 
@@ -24,9 +25,10 @@ export default function ProductCard({ product, className }: ProductCardProps) {
       >
         <div className='bg-gray-200 aspect-w-1 aspect-h-1 group-hover:opacity-75'>
           <NextImage
-            src={`/images/product-${Math.floor(Math.random() * 3)}.jpg`}
+            src={`${baseUrl}/static/images/${product.photos[0].photo_link}`}
             alt={product.name}
-            className='object-cover object-center w-full h-full sm:w-full sm:h-full'
+            className='w-full h-full'
+            imgClassName='object-contain'
             width='640'
             height='640'
           />

@@ -15,33 +15,13 @@ import useAuthStore from '@/store/useAuthStore';
 import useCartStore from '@/store/useCartStore';
 
 import Button from '@/components/Button';
+import NextImage from '@/components/NextImage';
 import Layout from '@/components/layout/Layout';
 
 import { formatRupiah } from '@/lib/helper';
-import axiosClient from '@/lib/axios';
+import axiosClient, { baseUrl } from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
 import { ProductDetailApi } from '@/types/api';
-
-const images = [
-  {
-    id: 1,
-    name: 'Angled view',
-    src: '/images/1.jpg',
-    alt: 'Angled front view with bag zipped and handles upright.',
-  },
-  {
-    id: 2,
-    name: 'Angled view',
-    src: '/images/2.jpg',
-    alt: 'Angled front view with bag zipped and handles upright.',
-  },
-  {
-    id: 3,
-    name: 'Angled view',
-    src: '/images/3.jpg',
-    alt: 'Angled front view with bag zipped and handles upright.',
-  },
-];
 
 const policies = [
   {
@@ -119,20 +99,22 @@ export default function ProductDetailPage() {
                 {/* Image selector */}
                 <div className='hidden w-full max-w-2xl mx-auto mt-6 sm:block lg:max-w-none'>
                   <Tab.List className='grid grid-cols-4 gap-6'>
-                    {images.map((image) => (
+                    {data.photos.map((image) => (
                       <Tab
                         key={image.id}
                         className='relative flex items-center justify-center h-24 text-sm font-medium text-gray-900 uppercase bg-white rounded-md cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50'
                       >
                         {({ selected }) => (
                           <>
-                            <span className='sr-only'>{image.name}</span>
+                            <span className='sr-only'>{data.name}</span>
                             <span className='absolute inset-0 overflow-hidden rounded-md'>
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={image.src}
-                                alt=''
-                                className='object-cover object-center w-full h-full'
+                              <NextImage
+                                src={`${baseUrl}/static/images/${image.photo_link}`}
+                                alt={data.name}
+                                className='w-full h-full'
+                                imgClassName='object-contain'
+                                width='640'
+                                height='640'
                               />
                             </span>
                             <span
@@ -150,13 +132,15 @@ export default function ProductDetailPage() {
                 </div>
 
                 <Tab.Panels className='w-full aspect-w-1 aspect-h-1'>
-                  {images.map((image) => (
+                  {data.photos.map((image) => (
                     <Tab.Panel key={image.id}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className='object-cover object-center w-full h-full sm:rounded-lg'
+                      <NextImage
+                        src={`${baseUrl}/static/images/${image.photo_link}`}
+                        alt={data.name}
+                        className='w-full h-full'
+                        imgClassName='object-contain'
+                        width='640'
+                        height='640'
                       />
                     </Tab.Panel>
                   ))}
