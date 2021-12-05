@@ -68,7 +68,7 @@ export default function Button({
           ],
         ],
         'disabled:cursor-not-allowed',
-        isFullWidth && 'w-full',
+        isFullWidth && 'w-full justify-center',
         isLoading &&
           'relative !text-transparent hover:!text-transparent !cursor-wait !transition-none'
       )}
