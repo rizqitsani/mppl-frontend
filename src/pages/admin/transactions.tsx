@@ -43,7 +43,7 @@ export default function AdminTransactionPage() {
       },
       {
         Header: 'Status Pengiriman',
-        accessor: 'shipment_status',
+        accessor: 'shipping_status',
       },
       {
         Header: 'Tanggal Transaksi',

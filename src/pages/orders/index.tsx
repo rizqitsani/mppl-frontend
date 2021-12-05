@@ -111,7 +111,7 @@ export default function OrderListPage() {
                       <div className='flex justify-between pt-6 sm:block sm:pt-0'>
                         <dt className='font-medium text-gray-900'>Status</dt>
                         <dd className='sm:mt-1'>
-                          {transaction.shipment_status}
+                          {transaction.shipping_status}
                         </dd>
                       </div>
                     </dl>

@@ -46,7 +46,7 @@ export interface Transaction {
   insurance_cost: number;
   payment_type: string;
   transaction_status: string;
-  shipment_status: string;
+  shipping_status: string;
   fraud_status: string;
   transaction_time: string;
   settlement_time: string;
