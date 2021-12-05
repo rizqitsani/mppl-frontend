@@ -49,7 +49,7 @@ export default function OrderDetail({ data, open, setOpen }: OrderDetailProps) {
           </div>
           <div className='mt-4 space-y-4 sm:space-y-6'>
             <div>
-              <h4 className='text-sm'>{data.shipment_status}</h4>
+              <h4 className='text-sm'>{data.shipping_status}</h4>
               <div className='py-2 mt-2 sm:py-1 sm:grid sm:grid-cols-3 sm:gap-4'>
                 <dt className='text-xs font-medium text-gray-500'>
                   No. Invoice
