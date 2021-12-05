@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { add, formatISO, parseISO } from 'date-fns';
 
 import { Dialog } from '@headlessui/react';
 import { HiX } from 'react-icons/hi';
@@ -26,6 +27,11 @@ type OrderDetailProps = {
 
 export default function OrderDetail({ data, open, setOpen }: OrderDetailProps) {
   const cancelButtonRef = React.useRef();
+
+  const estimationDate =
+    data.transaction_type === 'preorder'
+      ? add(parseISO(data.transaction_time), { weeks: 2 })
+      : add(parseISO(data.transaction_time), { days: 3 });
 
   return (
     <Modal open={open} setOpen={setOpen} initialFocus={cancelButtonRef}>
@@ -66,6 +72,16 @@ export default function OrderDetail({ data, open, setOpen }: OrderDetailProps) {
                   {formatDate(data.transaction_time, 'dd MMMM yyyy HH:mm')}
                 </dd>
               </div>
+              {data.settlement_time && (
+                <div className='py-2 sm:py-1 sm:grid sm:grid-cols-3 sm:gap-4'>
+                  <dt className='text-xs font-medium text-gray-500'>
+                    Estimasi Pengiriman
+                  </dt>
+                  <dd className='mt-1 text-xs text-gray-900 sm:text-right sm:mt-0 sm:col-span-2'>
+                    {formatDate(formatISO(estimationDate))}
+                  </dd>
+                </div>
+              )}
             </div>
             <div>
               <h4 className='text-sm'>Detail Produk</h4>

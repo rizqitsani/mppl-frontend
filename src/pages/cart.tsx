@@ -26,6 +26,8 @@ export default function CartPage() {
   const { data: queryData } = useQuery<CartApi, Error>('/cart');
   const data = queryData?.data;
 
+  const hasPreorder = data?.items.some((item) => item.product.stock === 0);
+
   if (data) {
     populate(data.items, data.total);
   }
@@ -137,31 +139,44 @@ export default function CartPage() {
                             <p className='mt-1 text-sm font-medium text-gray-500'>
                               {formatRupiah(item.product.price)}
                             </p>
+                            {item.product.stock === 0 && (
+                              <div className='mt-1'>
+                                <span className='inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800'>
+                                  Preorder (2 minggu)
+                                </span>
+                              </div>
+                            )}
                           </div>
 
                           <div className='mt-4 sm:mt-0 sm:pr-9'>
-                            <label
-                              htmlFor={`quantity-${item.id}`}
-                              className='sr-only'
-                            >
-                              Quantity, {item.product.name}
-                            </label>
-                            <select
-                              id={`quantity-${item.id}`}
-                              name={`quantity-${item.id}`}
-                              className='max-w-full rounded-md border border-gray-300 py-1.5 text-base leading-5 font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
-                              onChange={(e) => handleUpdate(e, item.product_id)}
-                            >
-                              {[...Array(4)].map((_, i) => (
-                                <option
-                                  key={i}
-                                  value={i + 1}
-                                  selected={item.quantity === i + 1}
+                            {item.product.stock > 0 && (
+                              <>
+                                <label
+                                  htmlFor={`quantity-${item.id}`}
+                                  className='sr-only'
                                 >
-                                  {i + 1}
-                                </option>
-                              ))}
-                            </select>
+                                  Quantity, {item.product.name}
+                                </label>
+                                <select
+                                  id={`quantity-${item.id}`}
+                                  name={`quantity-${item.id}`}
+                                  className='max-w-full rounded-md border border-gray-300 py-1.5 text-base leading-5 font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm'
+                                  onChange={(e) =>
+                                    handleUpdate(e, item.product_id)
+                                  }
+                                >
+                                  {[...Array(4)].map((_, i) => (
+                                    <option
+                                      key={i}
+                                      value={i + 1}
+                                      selected={item.quantity === i + 1}
+                                    >
+                                      {i + 1}
+                                    </option>
+                                  ))}
+                                </select>
+                              </>
+                            )}
 
                             <div className='absolute top-0 right-0'>
                               <button
@@ -213,7 +228,7 @@ export default function CartPage() {
 
                 <div className='mt-4'>
                   <ButtonLink variant='primary' href='/checkout' isFullWidth>
-                    Beli
+                    Beli {hasPreorder && '(Preorder)'}
                   </ButtonLink>
                 </div>
               </section>
