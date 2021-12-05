@@ -45,6 +45,7 @@ export interface Transaction {
   shipping_cost: number;
   insurance_cost: number;
   payment_type: string;
+  transaction_type: string;
   transaction_status: string;
   shipping_status: string;
   fraud_status: string;
@@ -57,6 +58,7 @@ export interface Transaction {
       id: string;
       name: string;
       price: number;
+      stock: number;
       photos: {
         id: string;
         photo_link: string;
@@ -90,6 +92,7 @@ export interface Cart {
   product: {
     name: string;
     price: number;
+    stock: number;
     photos: {
       id: string;
       photo_link: string;

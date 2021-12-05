@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { RadioGroup } from '@headlessui/react';
 
-import { HiCheckCircle } from 'react-icons/hi';
+import { HiCheckCircle, HiExclamation } from 'react-icons/hi';
 import clsx from 'clsx';
 
 import useAuthStore from '@/store/useAuthStore';
@@ -52,6 +52,8 @@ export default function CheckoutPage() {
     router.replace('/cart');
   }
 
+  const hasPreorder = items.some((item) => item.product.stock === 0);
+
   const insuranceTotal =
     Math.ceil(((cartTotal + selectedDeliveryMethod.price) * 0.4) / 100 / 100) *
     100;
@@ -78,6 +80,7 @@ export default function CheckoutPage() {
           total: cartTotal,
           shipping: selectedDeliveryMethod.price,
           insurance: insuranceTotal,
+          type: hasPreorder ? 'preorder' : '',
         })
         .then((res) => {
           const { token, id } = res.data.data;
@@ -123,6 +126,22 @@ export default function CheckoutPage() {
 
               <div className='pt-6'>
                 <h2 className='text-base font-bold text-gray-900'>Pesanan</h2>
+
+                {hasPreorder && (
+                  <div className='p-4 mt-4 rounded-md bg-yellow-50'>
+                    <div className='flex'>
+                      <div className='flex-shrink-0'>
+                        <HiExclamation
+                          className='w-5 h-5 text-yellow-400'
+                          aria-hidden='true'
+                        />
+                      </div>
+                      <div className='ml-3 text-sm text-yellow-700 '>
+                        <p>Barang preorder akan ready dalam 2 minggu</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 <ul role='list' className='divide-y divide-gray-200 '>
                   {items.map((item) => (

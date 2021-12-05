@@ -163,10 +163,18 @@ export default function ProductDetailPage() {
 
                   <div className='mt-3'>
                     <h2 className='sr-only'>Product information</h2>
-                    <p className='text-2xl text-gray-900'>
+                    <p className='text-2xl font-bold text-gray-900'>
                       {formatRupiah(data.price)}
                     </p>
                   </div>
+
+                  {data.stock === 0 && (
+                    <div className='mt-3'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-red-100 text-red-800'>
+                        Stok habis
+                      </span>
+                    </div>
+                  )}
 
                   <div className='mt-6'>
                     <h3 className='sr-only'>Description</h3>
@@ -182,7 +190,7 @@ export default function ProductDetailPage() {
                         variant='primary'
                         onClick={handleAddToCart}
                       >
-                        Add to bag
+                        + Keranjang {data.stock === 0 && '(Preorder)'}
                       </Button>
                       <button
                         type='button'
