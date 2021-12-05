@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
+import { useQuery } from 'react-query';
 
 import Seo from '@/components/Seo';
 import Footer from '@/components/layout/Footer';
@@ -8,36 +9,18 @@ import NextImage from '@/components/NextImage';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import CustomLink from '@/components/links/CustomLink';
 
-const favorites = [
-  {
-    id: 1,
-    name: 'Black Basic Tee',
-    price: '$32',
-    href: '#',
-    imageSrc: '/images/1.jpg',
-    imageAlt: "Model wearing women's black cotton crewneck tee.",
-  },
-  {
-    id: 2,
-    name: 'Off-White Basic Tee',
-    price: '$32',
-    href: '#',
-    imageSrc: '/images/2.jpg',
-    imageAlt: "Model wearing women's off-white cotton crewneck tee.",
-  },
-  {
-    id: 3,
-    name: 'Mountains Artwork Tee',
-    price: '$36',
-    href: '#',
-    imageSrc: '/images/3.jpg',
-    imageAlt:
-      "Model wearing women's burgundy red crewneck artwork tee with small white triangle overlapping larger black triangle.",
-  },
-];
+import { baseUrl } from '@/lib/axios';
+import { formatRupiah } from '@/lib/helper';
+import { ProductApi } from '@/types/api';
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
+
+  const { data: queryData } = useQuery<ProductApi, Error>('/products');
+  const data =
+    queryData?.data
+      .filter((product) => product.available === true)
+      .slice(0, 3) ?? [];
 
   return (
     <>
@@ -189,11 +172,11 @@ export default function Home() {
               </div>
 
               <div className='grid grid-cols-1 mt-6 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8'>
-                {favorites.map((favorite) => (
-                  <div key={favorite.id} className='relative group'>
+                {data.map((product) => (
+                  <div key={product.id} className='relative group'>
                     <NextImage
-                      src={favorite.imageSrc}
-                      alt={favorite.imageAlt}
+                      src={`${baseUrl}/static/images/${product.photos[0].photo_link}`}
+                      alt={product.name}
                       className='w-full overflow-hidden rounded-lg h-96 group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3'
                       imgClassName='w-full h-full object-center object-cover'
                       width='420'
@@ -201,13 +184,13 @@ export default function Home() {
                       priority
                     />
                     <h3 className='mt-4 text-base font-semibold text-gray-900'>
-                      <a href={favorite.href}>
+                      <UnstyledLink href={`/products/${product.id}`}>
                         <span className='absolute inset-0' />
-                        {favorite.name}
-                      </a>
+                        {product.name}
+                      </UnstyledLink>
                     </h3>
                     <p className='mt-1 text-sm text-gray-500'>
-                      {favorite.price}
+                      {formatRupiah(product.price)}
                     </p>
                   </div>
                 ))}
