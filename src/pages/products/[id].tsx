@@ -178,7 +178,7 @@ export default function ProductDetailPage() {
 
                   <div className='mt-6'>
                     <h3 className='sr-only'>Description</h3>
-                    <p className='text-base text-gray-700'>
+                    <p className='text-base text-gray-700 whitespace-pre-line'>
                       {data.description}
                     </p>
                   </div>
