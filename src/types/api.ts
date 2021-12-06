@@ -37,6 +37,18 @@ export interface TransactionApi {
   data: Transaction[];
 }
 
+export interface StatisticsApi {
+  message: string;
+  data: {
+    product: {
+      active: number;
+      non: number;
+    };
+    transaction: number;
+    user: number;
+  };
+}
+
 export interface Transaction {
   id: string;
   user_id: string;
