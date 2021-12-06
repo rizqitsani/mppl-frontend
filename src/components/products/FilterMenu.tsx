@@ -12,9 +12,9 @@ const filters = [
     id: 'price',
     name: 'Harga',
     options: [
-      { value: '0', label: 'Rp200 rb - Rp500 rb', min: 200000, max: 500000 },
-      { value: '1', label: 'Rp500 rb - Rp1 jt', min: 500001, max: 1000000 },
-      { value: '2', label: 'Rp1 jt - Rp3 jt', min: 1000001, max: 3000000 },
+      { value: '0', label: 'Rp100 rb - Rp250 rb', min: 100000, max: 250000 },
+      { value: '1', label: 'Rp250 rb - Rp500 jt', min: 250001, max: 500000 },
+      { value: '2', label: 'Rp500 jt - Rp1 jt', min: 500001, max: 1000000 },
     ],
   },
 ];

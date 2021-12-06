@@ -18,7 +18,8 @@ export default function ProductListPage() {
   const [priceFilter, setPriceFilter] = React.useState<PriceFilter>(null);
 
   const { data: queryData } = useQuery<ProductApi, Error>('/products');
-  const data = queryData?.data ?? [];
+  const data =
+    queryData?.data.filter((product) => product.available === true) ?? [];
 
   const filteredData = data.filter((product) => {
     if (priceFilter)

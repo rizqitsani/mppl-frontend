@@ -85,7 +85,7 @@ export interface Product {
   price: number;
   description: string;
   stock: number;
-  available: false;
+  available: boolean;
   created_at: string;
   updated_at: string;
   photos: {
