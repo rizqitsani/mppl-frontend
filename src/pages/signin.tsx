@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -16,8 +15,6 @@ import axiosClient from '@/lib/axios';
 import { defaultToastMessage } from '@/lib/constant';
 
 export default function SignInPage() {
-  const router = useRouter();
-
   const login = useAuthStore.useLogin();
 
   const methods = useForm();
@@ -38,7 +35,6 @@ export default function SignInPage() {
         })
         .then((user) => {
           login({ ...user.data.data, token: tempToken });
-          router.replace('/');
         }),
       {
         ...defaultToastMessage,

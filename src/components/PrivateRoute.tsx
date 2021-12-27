@@ -8,9 +8,10 @@ import useCartStore from '@/store/useCartStore';
 
 import axiosClient from '@/lib/axios';
 import { CartApi, UserInfoApi } from '@/types/api';
+import { ProtectedRoute } from '@/types/auth';
 
 type PrivateRouteProps = {
-  protectedRoutes: string[];
+  protectedRoutes: ProtectedRoute[];
   children: JSX.Element;
 };
 
@@ -24,10 +25,18 @@ export default function PrivateRoute({
   const isLoading = useAuthStore.useIsLoading();
   const login = useAuthStore.useLogin();
   const stopLoading = useAuthStore.useStopLoading();
+  const user = useAuthStore.useUser();
 
   const populate = useCartStore.usePopulate();
 
-  const isProtected = protectedRoutes.indexOf(router.pathname) !== -1;
+  const currentRoute: ProtectedRoute = React.useMemo(() => {
+    return (
+      protectedRoutes.find((route) => route.path === router.pathname) || {
+        path: router.pathname,
+        type: 'all',
+      }
+    );
+  }, [protectedRoutes, router.pathname]);
 
   React.useEffect(() => {
     const loadUser = async () => {
@@ -60,12 +69,36 @@ export default function PrivateRoute({
   }, []);
 
   React.useEffect(() => {
-    if (!isLoading && !isAuthenticated && isProtected) {
-      router.push('/signin');
+    if (!isLoading) {
+      if (isAuthenticated) {
+        // Prevent user from accessing auth or other role pages when authenticated
+        if (
+          currentRoute.type === 'auth' ||
+          (currentRoute.type !== user.role && currentRoute.type !== 'all')
+        ) {
+          if (user.role === 'admin') {
+            router.replace('/admin/dashboard');
+          } else if (user.role === 'user') {
+            router.replace('/products');
+          }
+        }
+        // Prevent user from accessing protected pages when authenticated
+      } else {
+        if (currentRoute.type !== 'auth' && currentRoute.type !== 'all') {
+          router.replace('/products');
+        }
+      }
     }
-  }, [isLoading, isAuthenticated, isProtected, router]);
+  }, [currentRoute, isAuthenticated, isLoading, router, user]);
 
-  if ((isLoading || !isAuthenticated) && isProtected) {
+  if (
+    ((isLoading || isAuthenticated) &&
+      (currentRoute.type === 'auth' ||
+        (currentRoute.type !== user?.role && currentRoute.type !== 'all'))) ||
+    ((isLoading || !isAuthenticated) &&
+      currentRoute?.type !== 'auth' &&
+      currentRoute?.type !== 'all')
+  ) {
     return (
       <div className='flex flex-col items-center justify-center min-h-screen text-gray-800'>
         <ImSpinner8 className='mb-4 text-4xl animate-spin' />
